@@ -11,7 +11,9 @@
 
 ## 使用
 
-直接用浏览器打开 `index.html`，或在手机浏览器访问本站点。
+直接打开：**https://spagwet.github.io/materials-science-review/**
+
+（本仓库已开启 GitHub Pages，`main` 分支根目录自动发布。）
 
 ## 说明
 
