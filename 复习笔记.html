@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>材料科学基础 · 复习笔记</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+  line-height: 1.75; color: #1f2937; background: #f4f6fb; margin: 0;
+  padding: calc(20px + env(safe-area-inset-top)) 16px calc(50px + env(safe-area-inset-bottom));
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.wrap { max-width: 780px; margin: 0 auto; background: #fff; border-radius: 14px;
+  border: 1px solid #e5e7eb; padding: 22px 18px; box-shadow: 0 6px 18px rgba(31,41,55,.06); }
+h1 { font-size: 22px; margin: 0 0 8px; }
+h2 { font-size: 18px; color: #1d4ed8; border-bottom: 2px solid #dbeafe; padding-bottom: 5px; margin-top: 26px; }
+h3 { font-size: 16px; color: #1f2937; margin-top: 20px; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 14px; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d5db; padding: 7px 9px; text-align: left; vertical-align: top; }
+th { background: #eff6ff; }
+tr:nth-child(even) td { background: #fafbfd; }
+img { max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 8px; margin: 10px 0; }
+blockquote { border-left: 4px solid #93c5fd; background: #eff6ff; margin: 12px 0; padding: 8px 12px; color: #374151; border-radius: 0 8px 8px 0; }
+code { background: #f3f4f6; padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+pre { background: #f3f4f6; padding: 10px; border-radius: 8px; overflow-x: auto; }
+a { color: #2563eb; }
+.back { display: inline-block; margin-bottom: 14px; color: #2563eb; text-decoration: none; font-size: 14px; }
+ul, ol { padding-left: 22px; }
+hr { border: none; border-top: 1px solid #e5e7eb; margin: 22px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="index.html">← 返回首页</a>
+<p>﻿# 材料科学基础 · 复习笔记</p>
+<blockquote>
+<p>依据《材料科学基础-2026复习.pdf》与《材料科学基础习题-2026.docx》整理。<br />
+全书 8 章：原子键合 → 晶体结构 → 晶体缺陷 → 塑性变形与再结晶 → 扩散 → 单元系相变 → 二元系相图 → 三元系相图。<br />
+复习主线：<strong>背概念 → 记数字 → 会公式 → 能算题 → 会简答</strong>。</p>
+</blockquote>
+<hr />
+<h2>第 1 章 原子键合</h2>
+<h3>核心概念</h3>
+<p><strong>四个量子数</strong></p>
+<table>
+<thead>
+<tr>
+<th>量子数</th>
+<th>符号</th>
+<th>决定什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主量子数</td>
+<td>n</td>
+<td><strong>电子能量及与核的平均距离</strong></td>
+</tr>
+<tr>
+<td>角量子数</td>
+<td>l</td>
+<td>轨道形状（亚层）</td>
+</tr>
+<tr>
+<td>磁量子数</td>
+<td>m</td>
+<td>轨道空间取向</td>
+</tr>
+<tr>
+<td>自旋量子数</td>
+<td>ms</td>
+<td>电子自旋方向</td>
+</tr>
+</tbody>
+</table>
+<p>电子排布时<strong>优先排布在能量最低的轨道</strong>（能量最低原理）。</p>
+<h3>键的类型</h3>
+<table>
+<thead>
+<tr>
+<th>键型</th>
+<th>本质</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>金属键</td>
+<td>正离子 + 自由电子云（电子<strong>共有化</strong>，属所有原子共有）</td>
+<td>无方向性、无饱和性；导电导热好</td>
+</tr>
+<tr>
+<td>共价键</td>
+<td>相邻原子<strong>共有价电子</strong>（属若干原子共有）</td>
+<td>有方向性、饱和性；C-H 键是共价键</td>
+</tr>
+<tr>
+<td>离子键</td>
+<td>正负离子静电吸引</td>
+<td>电负性差大</td>
+</tr>
+<tr>
+<td>范德华力</td>
+<td>分子间作用力</td>
+<td><strong>物理键</strong>，很弱</td>
+</tr>
+<tr>
+<td>氢键</td>
+<td>分子间作用力</td>
+<td>比范德华力强</td>
+</tr>
+</tbody>
+</table>
+<p><strong>极化</strong>：离子的变形（极化）使键性由<strong>离子键向共价键过渡</strong>，最终晶体结构类型发生变化。</p>
+<h3>记忆要点</h3>
+<ul>
+<li>物理键只有<strong>范德华力</strong>（氢键属于分子间作用力，可理解为弱键，但答题按讲义说法：物理键=范德华力）。</li>
+<li>金属材料导电导热好；<strong>聚乙烯塑料</strong>等聚合物不导电不导热。</li>
+<li>常见化学键归属：高分子中 C-H → 共价键；盐类 → 离子键；金属 → 金属键。</li>
+</ul>
+<hr />
+<h2>第 2 章 晶体结构</h2>
+<h3>晶体 vs 非晶体</h3>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>晶体</th>
+<th>非晶体</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原子排列</td>
+<td><strong>规则</strong></td>
+<td>无序</td>
+</tr>
+<tr>
+<td>性质</td>
+<td><strong>各向异性</strong></td>
+<td><strong>各向同性</strong></td>
+</tr>
+<tr>
+<td>熔点</td>
+<td><strong>固定</strong></td>
+<td>无固定熔点</td>
+</tr>
+<tr>
+<td>相同点</td>
+<td>都是固态物体</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>空间点阵</strong>：由结点构成的空间总体。特点：<strong>阵点周围环境都相同、在空间的位置一定</strong>。</p>
+<h3>晶面指数 / 晶向指数（必考计算）</h3>
+<ul>
+<li>晶面指数（Miller 指数）求法：<strong>截距取倒数 → 互质整数 → 加圆括号 (hkl)</strong></li>
+<li>晶向指数：沿晶向取最近结点坐标差 → 互质 → 加方括号 [uvw]</li>
+<li>晶面族 <code>{hkl}</code>、晶向族 <code>&lt;uvw&gt;</code></li>
+<li><strong>立方晶系中，相同指数的晶面和晶向互相垂直</strong>（如 (111)⊥[111]）</li>
+</ul>
+<p>例题：</p>
+<ul>
+<li>截距 3a、2b、c → 倒数 1/3、1/2、1 → 通分 ×6 → <strong>(236)</strong></li>
+<li>截距 a、2b、2c → 倒数 1、1/2、1/2 → ×2 → <strong>(211)</strong></li>
+</ul>
+<h3>晶胞与堆积（数字必背）</h3>
+<table>
+<thead>
+<tr>
+<th>结构</th>
+<th>每晶胞原子数</th>
+<th>堆积系数</th>
+<th>配位数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>体心立方 bcc</td>
+<td><strong>2</strong></td>
+<td><strong>68%</strong></td>
+<td>8</td>
+</tr>
+<tr>
+<td>面心立方 fcc</td>
+<td><strong>4</strong></td>
+<td><strong>74%</strong></td>
+<td>12</td>
+</tr>
+<tr>
+<td>密排六方 hcp</td>
+<td>6</td>
+<td><strong>74%</strong></td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<p>口诀：<strong>bcc 两个 68，fcc 四个 74，hcp 六个 74</strong>。</p>
+<ul>
+<li>等径球紧密堆积：</li>
+<li><strong>六方最紧密堆积 = ABAB…</strong></li>
+<li><strong>面心立方（立方最紧密）= ABCABC…</strong></li>
+<li>紧密堆积产生两种间隙：<strong>八面体间隙由 6 个球围成，四面体间隙由 4 个球围成</strong>。</li>
+<li>金刚石 vs 石墨：同为碳原子，硬度天差地别，原因是<strong>晶体结构不同</strong>（不是成分、组织、工艺）。</li>
+</ul>
+<hr />
+<h2>第 3 章 晶体缺陷</h2>
+<h3>缺陷分类（必考）</h3>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>维度</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>点缺陷</td>
+<td>0 维</td>
+<td><strong>空位</strong>、间隙原子、置换原子</td>
+</tr>
+<tr>
+<td>线缺陷</td>
+<td>1 维</td>
+<td><strong>位错</strong></td>
+</tr>
+<tr>
+<td>面缺陷</td>
+<td>2 维</td>
+<td><strong>晶界</strong>、相界、孪晶界</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>溶质/杂质原子使晶格常数<strong>可能增大也可能减小</strong>（看溶质原子大小，不能一概而论）。</li>
+<li>氮、氧原子半径小，能挤入金属间隙 → 形成间隙固溶体。</li>
+</ul>
+<h3>固溶体 vs 化合物</h3>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>关键判据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>间隙固溶体</td>
+<td>小原子溶入后<strong>仍保留大原子的点阵结构</strong></td>
+</tr>
+<tr>
+<td>间隙化合物（间隙相）</td>
+<td>小原子溶入后<strong>改变了大原子的点阵结构，形成新相</strong></td>
+</tr>
+<tr>
+<td>正常价化合物</td>
+<td>金属与电负性较强的 IVA、VA、VIA 族元素按<strong>原子价规律</strong>形成</td>
+</tr>
+<tr>
+<td>电子化合物</td>
+<td>按<strong>电子浓度</strong>规律形成，结构与 A、B 组元都不同</td>
+</tr>
+</tbody>
+</table>
+<h3>位错（本章重头戏）</h3>
+<ul>
+<li>位错性质：</li>
+<li>位错是<strong>已滑移区与未滑移区的边界</strong>；</li>
+<li>位错线<strong>不一定是直线</strong>；</li>
+<li><strong>位错不能中断于晶体内部</strong>（只能终止于表面、晶界或形成位错环）——这是常考的不正确项；</li>
+<li>柏氏矢量是点阵平移矢量（单位位错）。</li>
+<li>位错类型：</li>
+<li>刃型位错：b ⊥ 位错线</li>
+<li>螺型位错：b ∥ 位错线</li>
+<li>混合型位错：b 与位错线<strong>呈一定角度</strong></li>
+<li><strong>单位位错（全位错）</strong>：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>结构</th>
+<th>单位位错</th>
+<th>伯氏矢量大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fcc</td>
+<td><strong>a/2⟨110⟩</strong></td>
+<td><strong>√2/2·a</strong></td>
+</tr>
+<tr>
+<td>bcc</td>
+<td><strong>a/2⟨111⟩</strong></td>
+<td><strong>√3/2·a</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>全位错：b 等于点阵矢量或其整数倍，滑移后原子排列不变；不全位错：b 不是点阵矢量整数倍。</li>
+<li>位错能量 <strong>E ∝ b²</strong>：两根同向同大小位错合并，b 加倍 → 能量为原来的 <strong>4 倍</strong>（常考简答）。</li>
+<li>位错的运动：</li>
+<li><strong>滑移</strong>：切应力 τ 作用下沿滑移面运动（刃、螺、混合位错都能滑移）→ 永久变形</li>
+<li><strong>攀移</strong>：刃位错垂直滑移面的运动（借助热缺陷，空位/间隙原子增殖或消失）</li>
+<li><strong>交滑移</strong>：螺位错受阻后转到相交的另一滑移面上继续滑移</li>
+<li><strong>弗兰克-瑞德源</strong>：两端被钉扎的位错段在切应力下弯曲、绕节点回转、正负螺位错抵消形成位错环，循环产生新位错环 → 位错增殖。</li>
+<li>扩展位错：两个不全位错中间夹层错区，仍是线缺陷。</li>
+</ul>
+<h3>晶界与相界</h3>
+<ul>
+<li><strong>小角度晶界：相邻晶粒位相差 &lt; 10°</strong>；大角度晶界：&gt; 10°。</li>
+<li><strong>共格相界</strong>：界面原子同时位于两相晶格结点上，两相晶格彼此衔接，界面原子为两相共有。</li>
+</ul>
+<hr />
+<h2>第 4 章 塑性变形与再结晶</h2>
+<h3>滑移</h3>
+<ul>
+<li>塑性变形以<strong>滑移为主</strong>。</li>
+<li>滑移系（滑移面 × 滑移方向）：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>结构</th>
+<th>滑移系数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fcc</td>
+<td>12</td>
+</tr>
+<tr>
+<td>bcc</td>
+<td>12（常答 48 个滑移系，考选择题记 12）</td>
+</tr>
+<tr>
+<td>hcp</td>
+<td><strong>3</strong>（少，故 hcp 塑性差、易孪生）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Schmid 定律</strong>：分切应力 τ = σ·cosφ·cosλ，cosφ·cosλ 称为<strong>取向因子（施密特因子）</strong>，<strong>45° 时最大为 0.5</strong>。取向因子越大，分切应力越大。</li>
+<li>软取向：滑移系与外力接近 45°（易滑移）；硬取向：偏离 45° 远（σs 大）。</li>
+<li>几何硬化：滑移转动使晶面<strong>越来越远离 45°</strong>，滑移变难；几何软化：越来越接近 45°，变易。</li>
+<li>切应力作用下，螺位错只能滑移（不能攀移）；刃位错才能攀移。</li>
+</ul>
+<h3>加工硬化与屈服</h3>
+<ul>
+<li><strong>加工硬化（冷作硬化）</strong>：冷塑变形增大 → 强度硬度↑、塑性韧性↓。</li>
+<li>消除加工硬化：<strong>再结晶退火</strong>。</li>
+<li><strong>屈服现象解释</strong>（两道理论，常考）：<br />
+  1. <strong>柯氏气团（Cottrell 气团）</strong>：溶质原子钉扎位错，挣脱需要大应力 → 上屈服点；挣脱后易动 → 下屈服点与平台。<br />
+  2. <strong>位错增殖理论</strong>：变形前可动位错密度低，需高应力维持应变速率（上屈服点）；变形开始后位错迅速增殖，应力突然下降（下屈服点）。</li>
+</ul>
+<h3>滑移 vs 孪生（6 条对比，常考）</h3>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>滑移</th>
+<th>孪生</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>位移量</td>
+<td>原子间距的<strong>整数倍</strong></td>
+<td><strong>分数倍</strong>（小于一个原子间距）</td>
+</tr>
+<tr>
+<td>位向</td>
+<td>晶体位向不变</td>
+<td>位向改变，与基体<strong>镜面对称</strong></td>
+</tr>
+<tr>
+<td>临界切应力</td>
+<td>小</td>
+<td><strong>大得多</strong></td>
+</tr>
+<tr>
+<td>变形速度</td>
+<td>较慢</td>
+<td><strong>接近声速</strong></td>
+</tr>
+<tr>
+<td>变形量</td>
+<td>大</td>
+<td>小</td>
+</tr>
+<tr>
+<td>结构倾向</td>
+<td>fcc 易滑移</td>
+<td><strong>hcp 易孪生</strong></td>
+</tr>
+<tr>
+<td>相同点</td>
+<td>都通过位错运动实现</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>回复 · 再结晶 · 晶粒长大（热加工过程）</h3>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>组织变化</th>
+<th>性能变化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>回复</td>
+<td>晶粒形状不变，位错空位大量减少</td>
+<td>强度硬度略降、塑性略升、<strong>残余应力大大降低</strong></td>
+</tr>
+<tr>
+<td>再结晶</td>
+<td>拉长/破碎晶粒 → 新的均匀细小<strong>等轴晶</strong></td>
+<td>强度硬度明显下降、塑性韧性大增、<strong>加工硬化消除、内应力全部消失</strong></td>
+</tr>
+<tr>
+<td>晶粒长大</td>
+<td>晶粒明显长大变粗</td>
+<td>强度、硬度、塑性、韧性<strong>都显著降低</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>再结晶温度：纯金属 <strong>T再 ≈ 0.4·T熔（K）</strong>。</li>
+<li><strong>临界变形度</strong>（约 2%～10%）：变形量很小（如 5%）时退火，只有局部形核 → 晶粒反而<strong>极粗大</strong>。80% 大变形 + 温度过高退火也会粗化。细化晶粒：<strong>足够大变形（80%）+ 较低温度（如 150℃）退火</strong>。</li>
+<li><strong>形变织构</strong>：塑性变形使各晶粒滑移面/方向向主形变方向转动，形成择优取向。变形引起的叫变形织构；再结晶后仍保持择优取向的叫<strong>再结晶织构</strong>。</li>
+<li>典型案例（高锰钢鄂板钢丝断裂）：冷拔钢丝有加工硬化强度高；被红热鄂板加热到再结晶温度以上后<strong>发生再结晶、强度下降</strong>，承受不住重量而断裂。</li>
+</ul>
+<hr />
+<h2>第 5 章 扩散</h2>
+<h3>菲克定律（必背表达式）</h3>
+<ul>
+<li><strong>菲克第一定律</strong>（稳态扩散，浓度不随时间变）：J = -D·dρ/dx</li>
+<li><strong>菲克第二定律</strong>（非稳态扩散，浓度随时间变）：∂ρ/∂t = D·∂²ρ/∂x²</li>
+<li>误差函数解（渗碳计算用）：<strong>(Ws − W) / (Ws − W0) = erf( x / (2√(Dt)) )</strong></li>
+<li>Ws = 表面浓度；W0 = 初始浓度；W = 深度 x 处的浓度</li>
+<li>稳态 = 各处浓度及浓度梯度<strong>不随时间改变</strong>。</li>
+</ul>
+<h3>扩散机制与规律</h3>
+<ul>
+<li>扩散机制：<strong>间隙扩散</strong>（C 在 Fe 中，最快）、空位扩散、直接换位扩散。</li>
+<li><strong>扩散驱动力 = 化学位梯度</strong>（不是浓度梯度！）。</li>
+<li>三条路径的扩散系数：<strong>D表面 &gt; D晶界 &gt; D晶内</strong>，即 DS &gt; DB &gt; DL。</li>
+<li><strong>柯肯达尔效应</strong>：两侧原子扩散速率不等时，<strong>原始界面移向扩散速率较大的一方</strong>。若界面向 A 试样移动 → A 组元扩散速率更大。</li>
+<li>上坡扩散：低浓度 → 高浓度（化学位驱动）；下坡扩散：高浓度 → 低浓度。</li>
+<li>原子扩散：无新相产生；<strong>反应扩散</strong>：扩散使溶质浓度超过固溶体极限而<strong>形成新相</strong>。</li>
+</ul>
+<h3>影响扩散的因素</h3>
+<ol>
+<li>晶体致密度越低扩散越快；</li>
+<li>温度越高扩散越快；</li>
+<li>间隙扩散比空位扩散快；</li>
+<li>表面、晶界扩散比晶内快；</li>
+<li>应力改变化学位，影响扩散方向；</li>
+<li>第三组元改变结合力与扩散激活能。</li>
+</ol>
+<h3>渗碳为什么选在奥氏体区（900～930℃）？</h3>
+<p>虽然 C 在 α-Fe（bcc）中的扩散系数比在 γ-Fe（fcc）中大 100 倍，但：<br />
+1. 奥氏体区温度高，加速扩散；<br />
+2. <strong>C 在奥氏体中的溶解度远大于铁素体</strong>——这是基本原因。</p>
+<hr />
+<h2>第 6 章 单元系相变原理</h2>
+<h3>形核</h3>
+<ul>
+<li>凝固驱动力：液固自由能差；需要过冷。</li>
+<li><strong>均匀形核</strong>：靠<strong>结构起伏 + 能量起伏</strong>，在过冷液相中自发形核。</li>
+<li><strong>非均匀形核</strong>：依附<strong>固态杂质表面或器壁</strong>形核，界面能减小、形核功小，<strong>更容易</strong>，可在较小过冷度下获得较高形核率。</li>
+<li>相同点：驱动力与阻力相同、临界半径相同、都要形核功、都要临界过冷度、形核率先随过冷度增加而增加。</li>
+<li><strong>临界晶核半径</strong>：r* = 2σ·Tm / (Lm·ΔT)（σ 固液界面能，Lm 熔化热，ΔT 过冷度）</li>
+<li><strong>临界形核功</strong>：ΔG* = 16πσ³ / (3ΔGv²)</li>
+<li>临界核的界面能 = <strong>3ΔG*</strong>（ΔG* = 1/3 界面能项）——常考关系题。</li>
+<li>r = r<em> 时，体系的自由能变化 </em><em>大于零（= 形核功 ΔG</em>）**。</li>
+<li><strong>形核率随过冷度：先增加后降低</strong>（驱动力↑ 但原子活动能力↓，两个因素竞争）。</li>
+</ul>
+<h3>界面与相变</h3>
+<ul>
+<li><strong>光滑界面（小平面界面）</strong>：原子尺度上光滑平整，液固截然分开；光学显微镜下呈曲折小平面。</li>
+<li>一级相变：体积、熵、焓突变（奥氏体转变是<strong>一级相变</strong>）。</li>
+<li><strong>铸锭宏观组织三区</strong>：表层细晶区（激冷非均匀形核）→ 柱状晶区（单向热流枝晶延伸）→ 心部等轴晶区（散热无方向性，各向等速长大）。</li>
+<li>结晶潜热大部分通过液相散失 → 液面前沿过冷大 → <strong>树枝晶</strong>。</li>
+<li>铝过冷度 ΔT=10℃ 时临界晶核 r<em> ≈ </em><em>10 nm</em>*（用公式代 Tm=993K, Lm=1.836×10⁹ J/m³, σ=93 mJ/m² 算）。</li>
+</ul>
+<hr />
+<h2>第 7 章 二元系相图</h2>
+<h3>基本概念</h3>
+<ul>
+<li><strong>相</strong>：同一聚集状态、同一晶体结构性质、以界面隔开的均匀组成部分。</li>
+<li><strong>组织</strong>：若干相以一定数量、形状、尺寸、分布组合成的<strong>具有独特形态</strong>的部分。单相组织有双重身份；组织侧重微观结构，相侧重存在方式。</li>
+<li><strong>杠杆定律只能用于两相区</strong>计算相对量。</li>
+<li>平衡凝固：先凝固的固相中<strong>高熔点组元含量较高</strong>。</li>
+<li>包晶转变 L + α → β：高熔点组元<strong>由 α 向 β 内扩散</strong>。</li>
+<li>共晶两相共存条件：<strong>同种原子在两相中的化学势相等</strong>（如 α 中 Pb 的化学势 = β 中 Pb 的化学势）。</li>
+<li>非平衡凝固：液固成分偏离相线，凝固在更低温度完成，成分不均匀（晶内偏析/枝晶偏析）。</li>
+<li>枝晶偏析：非平衡凝固先凝固部分高熔点组元含量高，枝干与枝叶成分不同。</li>
+<li>只有共析钢才有共析转变？<strong>不对</strong>。含碳 0.0218%～6.69% 的钢和铸铁冷却到 727℃ 时，奥氏体含碳量达到 0.77% 都会发生共析转变。</li>
+</ul>
+<h3>成分过冷（重要简答）</h3>
+<ul>
+<li>定义：凝固时溶质再分配使固液界面前沿溶质浓度变化，引起理论凝固温度改变，从而在界面前液相内形成过冷。</li>
+<li>原因：液相溶质分布改变前沿凝固温度，实际温度低于溶质分布决定的凝固温度。</li>
+<li>对界面形貌的影响：<strong>成分过冷由小到大：平面状 → 胞状 → 树枝状</strong>。</li>
+</ul>
+<h3>Fe-Fe3C 相图（重中之重）</h3>
+<p><img alt="Fe-Fe3C 相图（原图）" src="images/Fe-Fe3C相图-原图.png" /></p>
+<blockquote>
+<p>上图直接取自习题答案的原图；复习 PDF 里的同一张原图在 <code>images/Fe-Fe3C相图-复习PDF原图.png</code>。<br />
+配套综合题原图：<code>images/Fe-Fe3C-1.0C-结晶过程-原图.png</code>（1.0%C 过共析钢平衡结晶过程）、<code>images/Fe-Fe3C-1.0C-室温组织示意图-原图.png</code>（室温组织示意图）。<br />
+下面是我画的简化标注版，方便记忆关键点：</p>
+</blockquote>
+<p><img alt="Fe-Fe3C 相图（简化标注版）" src="images/Fe-Fe3C相图.svg" /></p>
+<p><strong>三个关键温度</strong>（口诀：<strong>727 共析、1148 共晶、1495 包晶</strong>）：</p>
+<table>
+<thead>
+<tr>
+<th>转变</th>
+<th>温度</th>
+<th>成分（wt%C）</th>
+<th>反应式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>包晶</td>
+<td>1495℃</td>
+<td>L 0.17、δ 0.09、γ 0.53</td>
+<td>L + δ → γ</td>
+</tr>
+<tr>
+<td>共晶</td>
+<td>1148℃</td>
+<td>L 4.3、γ 2.11、Fe3C 6.69</td>
+<td>L → γ + Fe3C</td>
+</tr>
+<tr>
+<td>共析</td>
+<td>727℃</td>
+<td>γ 0.77、α 0.0218、Fe3C 6.69</td>
+<td>γ → α + Fe3C（珠光体）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键成分点</strong>：0.0218%（α 最大溶碳）、0.77%（共析）、2.11%（γ 最大溶碳）、4.3%（共晶）、6.69%（Fe3C）。</p>
+<p><strong>七类合金室温组织（必背）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>成分范围</th>
+<th>室温组织</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工业纯铁</td>
+<td>w(C) ≤ 0.0218%</td>
+<td>F + Fe3CIII</td>
+</tr>
+<tr>
+<td>亚共析钢</td>
+<td>0.0218% ~ 0.77%</td>
+<td><strong>P + F</strong></td>
+</tr>
+<tr>
+<td>共析钢</td>
+<td>0.77%</td>
+<td><strong>P（珠光体）</strong></td>
+</tr>
+<tr>
+<td>过共析钢</td>
+<td>0.77% ~ 2.11%</td>
+<td><strong>P + Fe3CII（网状）</strong></td>
+</tr>
+<tr>
+<td>亚共晶白口铸铁</td>
+<td>2.11% ~ 4.3%</td>
+<td>P + Fe3CII + Le′</td>
+</tr>
+<tr>
+<td>共晶白口铸铁</td>
+<td>4.3%</td>
+<td><strong>Le′（莱氏体）</strong></td>
+</tr>
+<tr>
+<td>过共晶白口铸铁</td>
+<td>4.3% ~ 6.69%</td>
+<td>Fe3CI + Le′</td>
+</tr>
+</tbody>
+</table>
+<p><strong>渗碳体的三种形态（易混）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>来源</th>
+<th>形态/影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一次渗碳体 Fe3CI</td>
+<td>共晶转变（液相析出）</td>
+<td>连续分布（莱氏体基体，鱼骨状）</td>
+</tr>
+<tr>
+<td>二次渗碳体 Fe3CII</td>
+<td>奥氏体析出</td>
+<td><strong>网状，使脆性增大、强度塑性韧性降低</strong></td>
+</tr>
+<tr>
+<td>三次渗碳体 Fe3CIII</td>
+<td>铁素体析出</td>
+<td>短棒状/片状，微量</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>珠光体 = 铁素体 + 渗碳体，包含两种相</strong>（选择题常考：哪种组织含两相 → 珠光体）。</li>
+<li>渗碳体：Fe 与 C 形成的复杂晶格间隙化合物，硬度高、塑性差（延伸率≈0）。</li>
+<li>0.45%C 合金：少量共析渗碳体（片状，强化基体）+微量三次渗碳体；3.0%C 合金：大量共晶渗碳体（连续分布）+少量二次渗碳体（网状，降低强度）+共析渗碳体。</li>
+</ul>
+<h3>杠杆定律例题（Pb-Sn，45%Sn @183℃）</h3>
+<p><img alt="Pb-Sn 相图" src="images/Pb-Sn相图.svg" /></p>
+<p>已知：α 端点 19%Sn、共晶点 61.9%Sn、β 端点 97.5%Sn。</p>
+<ul>
+<li>先共晶 α初 = (61.9−45)/(61.9−19) ×100% = <strong>38.3%</strong>；共晶 (α+β) = <strong>61.7%</strong></li>
+<li>α 相总量 = (97.5−45)/(97.5−19) ×100% = <strong>67%</strong>；β 相 = <strong>33%</strong></li>
+</ul>
+<p>50%Sn 合金：α初 ≈ 28%，(α+β)共 ≈ 72%；α 相 60.5%，β 相 39.5%。室温平衡组织：<strong>α初 + (α+β)共 + βⅡ</strong>。</p>
+<h3>渗碳时间计算示例</h3>
+<p>950℃ 渗碳，0.1mm 深处要 0.9%C，表面 1.20%C，D = 10⁻¹⁰ m²/s：</p>
+<p>(1.20 − 0.9)/(1.20 − 0) = erf(x/2√(Dt))，查误差函数表解得 <strong>t ≈ 327 s（约 7.9 min）</strong>。</p>
+<h3>过共析钢平衡结晶过程（1.0%C）</h3>
+<p>L → L+γ → γ → γ+Fe3CII → <strong>P + Fe3CII（网状）</strong></p>
+<hr />
+<h2>第 8 章 三元系相图</h2>
+<ul>
+<li><strong>恒压相律</strong>：F = C − P + 1 = 4 − P，F=0 时 <strong>Pmax = 4</strong>（三元合金最多四相共存）。</li>
+<li>三相区等温截面：<strong>连接的三角形，顶点触及单相区</strong>（相区接触法则：相邻相区相数差 1）。</li>
+<li><strong>垂直截面图</strong>：可分析材料的<strong>平衡凝固过程</strong>，但<strong>不能用杠杆定律</strong>计算各相相对量（成分未知）。</li>
+<li>三元共晶四相平衡区：形状为<strong>三角形</strong>；<strong>上方连 3 个三相区</strong>（L+α+β、L+β+γ、L+α+γ），<strong>下方连 1 个三相区</strong>（α+β+γ）；不与两相区或单相区相连（相数差 1）。</li>
+<li>计算题套路（杠杆定律在直线上的投影）：已知 WB/WL、液相 B 含量、A/C 比值，联立解得合金成分。</li>
+<li>例：WB/WL = 2 = (XB−40)/(100−XB) → XB = 80%；X A + X C = 20% 且 XA/XC = 3 → <strong>K 合金 = 15%A + 80%B + 5%C</strong>。</li>
+</ul>
+<hr />
+<h2>全书速记卡（考前 10 分钟）</h2>
+<p><strong>数字类</strong></p>
+<table>
+<thead>
+<tr>
+<th>数字</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2 / 4 / 6</td>
+<td>bcc / fcc / hcp 每晶胞原子数</td>
+</tr>
+<tr>
+<td>68% / 74%</td>
+<td>bcc / fcc（hcp）堆积系数</td>
+</tr>
+<tr>
+<td>3 / 12 / 12</td>
+<td>hcp / fcc / bcc 滑移系</td>
+</tr>
+<tr>
+<td>45°</td>
+<td>Schmid 取向因子最大 0.5</td>
+</tr>
+<tr>
+<td>0.4 Tm</td>
+<td>纯金属再结晶温度（K）</td>
+</tr>
+<tr>
+<td>2%～10%</td>
+<td>临界变形度（退火晶粒粗大）</td>
+</tr>
+<tr>
+<td>&lt;10° / &gt;10°</td>
+<td>小角度 / 大角度晶界</td>
+</tr>
+<tr>
+<td>727 / 1148 / 1495℃</td>
+<td>共析 / 共晶 / 包晶</td>
+</tr>
+<tr>
+<td>0.77 / 2.11 / 4.3 / 6.69%</td>
+<td>共析 / γ最大溶碳 / 共晶 / Fe3C 含碳</td>
+</tr>
+<tr>
+<td>√2/2 a、√3/2 a</td>
+<td>fcc、bcc 单位位错 b 大小</td>
+</tr>
+<tr>
+<td>4 倍</td>
+<td>两根同向位错合并后能量</td>
+</tr>
+<tr>
+<td>327 s</td>
+<td>950℃ 渗碳例题时间</td>
+</tr>
+<tr>
+<td>10 nm</td>
+<td>铝 ΔT=10℃ 临界晶核半径</td>
+</tr>
+</tbody>
+</table>
+<p><strong>易混对比一句话</strong></p>
+<ul>
+<li>晶体各向异性有固定熔点；非晶体各向同性无固定熔点。</li>
+<li>间隙固溶体保留大原子点阵；间隙化合物改变点阵形成新相。</li>
+<li>滑移位向不变、整数倍原子间距；孪生位向改变成镜面对称、分数倍位移。</li>
+<li>再结晶消除加工硬化；回复主要消除残余应力。</li>
+<li>上坡扩散去高化学位（低浓度→高浓度），下坡扩散相反。</li>
+<li>反应扩散有新相，原子扩散无新相。</li>
+<li>柯肯达尔界面移向扩散快的一方。</li>
+<li>共析转变不是共析钢专利，0.0218%～6.69% 都会发生。</li>
+<li>三元垂直截面能看凝固过程，不能算杠杆。</li>
+</ul>
+<hr />
+<h2>高频简答题速答清单</h2>
+<ol>
+<li><strong>渗碳为何选奥氏体区</strong>：溶解度大 + 温度高加速扩散。</li>
+<li><strong>屈服现象</strong>：柯氏气团钉扎 + 位错增殖导致应力降落。</li>
+<li><strong>钢丝断裂</strong>：加工硬化的钢丝被加热发生再结晶，强度骤降。</li>
+<li><strong>均匀 vs 非均匀形核</strong>：非均匀形核借助杂质/器壁，界面能小、形核功小，更易。</li>
+<li><strong>成分过冷对界面影响</strong>：平面 → 胞状 → 树枝状。</li>
+<li><strong>铸锭组织</strong>：表层细晶 + 柱状晶 + 心部等轴晶。</li>
+<li><strong>滑移 vs 孪生</strong>：见第 4 章 6 条对比表。</li>
+<li><strong>几何硬化 vs 软化</strong>：转动后远离 45° 变难（硬化）；接近 45° 变易（软化）。</li>
+<li><strong>弗兰克-瑞德源</strong>：钉扎位错弯曲 → 绕节点回转 → 抵消成环 → 循环增殖。</li>
+<li><strong>影响扩散因素</strong>：致密度、温度、机制、路径、应力、第三组元。</li>
+</ol>
+</div>
+</body>
+</html>

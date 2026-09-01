@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#3b82f6">
+<title>材料科学基础 · 学习资料</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+    background: linear-gradient(160deg, #eff6ff 0%, #f4f6fb 60%);
+    color: #1f2937;
+    min-height: 100vh;
+    padding: calc(28px + env(safe-area-inset-top)) 20px calc(36px + env(safe-area-inset-bottom));
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  h1 { font-size: 24px; text-align: center; margin-bottom: 4px; }
+  .sub { color: #6b7280; font-size: 13px; text-align: center; margin-bottom: 26px; }
+  .card {
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 16px;
+    padding: 18px; margin-bottom: 14px;
+    box-shadow: 0 6px 18px rgba(31,41,55,.06);
+  }
+  .card h2 { font-size: 15px; color: #3b82f6; margin-bottom: 10px; }
+  a.item {
+    display: flex; align-items: center; justify-content: space-between;
+    text-decoration: none; color: #1f2937;
+    padding: 13px 14px; border-radius: 12px; background: #f8fafc;
+    border: 1px solid #eef2f7; margin-bottom: 8px; min-height: 52px;
+  }
+  a.item:active { background: #dbeafe; }
+  a.item .name { font-size: 15px; }
+  a.item .desc { font-size: 12px; color: #6b7280; margin-top: 2px; }
+  a.item .arrow { color: #94a3b8; font-size: 18px; }
+  .tip {
+    background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px;
+    padding: 12px 14px; font-size: 12px; color: #92400e; line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+  <h1>📘 材料科学基础</h1>
+  <div class="sub">学习资料（手机版）</div>
+
+  <div class="card">
+    <h2>互动学习</h2>
+    <a class="item" href="闪卡.html">
+      <div>
+        <div class="name">🎴 闪卡学习（推荐）</div>
+        <div class="desc">60 道选择题自测 + 名词解释 + 公式数字，带解析，进度自动保存</div>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+  </div>
+
+  <div class="card">
+    <h2>复习资料</h2>
+    <a class="item" href="复习笔记.html">
+      <div>
+        <div class="name">📝 复习笔记</div>
+        <div class="desc">8 章考点、公式、对比表、相图原图</div>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="item" href="复习计划.html">
+      <div>
+        <div class="name">🗓️ 复习计划</div>
+        <div class="desc">14 天 / 5 天 / 1 天复习安排</div>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="item" href="手机使用说明.html">
+      <div>
+        <div class="name">📱 手机使用说明</div>
+        <div class="desc">常见问题与使用技巧</div>
+      </div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="item" href="anki_导入.csv" download>
+      <div>
+        <div class="name">📦 Anki 卡片（下载）</div>
+        <div class="desc">98 张卡，可导入 Anki 手机 App</div>
+      </div>
+      <div class="arrow">⬇</div>
+    </a>
+  </div>
+
+  <div class="tip">
+    💡 小技巧：用手机浏览器打开「闪卡学习」后，可添加到主屏幕（iOS：分享 → 添加到主屏幕；Android：菜单 → 添加到主屏幕），以后像 App 一样点开就能用。
+  </div>
+</body>
+</html>

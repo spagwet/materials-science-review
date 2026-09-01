@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="760" viewBox="0 0 900 760" font-family="Microsoft YaHei, SimHei, sans-serif">
+  <title>Fe-Fe3C 二元相图（示意图）</title>
+  <rect x="0" y="0" width="900" height="760" fill="#ffffff"/>
+
+  <!-- axes -->
+  <line x1="90" y1="700" x2="870" y2="700" stroke="#333" stroke-width="2"/>
+  <line x1="90" y1="700" x2="90" y2="60" stroke="#333" stroke-width="2"/>
+  <text x="480" y="742" font-size="18" text-anchor="middle" fill="#111">碳含量 w(C) / %</text>
+  <text x="30" y="390" font-size="18" text-anchor="middle" fill="#111" transform="rotate(-90 30 390)">温度 / ℃</text>
+
+  <!-- tick labels -->
+  <text x="90" y="724" font-size="14" text-anchor="middle">0</text>
+  <text x="223" y="724" font-size="14" text-anchor="middle">0.77</text>
+  <text x="333" y="724" font-size="14" text-anchor="middle">2.11</text>
+  <text x="455" y="724" font-size="14" text-anchor="middle">4.3</text>
+  <text x="690" y="724" font-size="14" text-anchor="middle">6.69</text>
+  <text x="62" y="125" font-size="14" text-anchor="end">1538</text>
+  <text x="62" y="162" font-size="14" text-anchor="end">1495</text>
+  <text x="62" y="400" font-size="14" text-anchor="end">1148</text>
+  <text x="62" y="645" font-size="14" text-anchor="end">727</text>
+  <text x="62" y="398" font-size="14" text-anchor="end"></text>
+
+  <!-- phase boundaries -->
+  <!-- liquidus: 1538(0) -> 1495(0.17) -> 1148(4.3) -> up to Fe3C -->
+  <line x1="90" y1="117" x2="152" y2="162" stroke="#c0392b" stroke-width="3"/>
+  <line x1="152" y1="162" x2="455" y2="400" stroke="#c0392b" stroke-width="3"/>
+  <line x1="455" y1="400" x2="690" y2="330" stroke="#c0392b" stroke-width="3"/>
+
+  <!-- solidus / delta: 1538(0) -> 0.09(1495) -->
+  <line x1="90" y1="117" x2="124" y2="162" stroke="#2471a3" stroke-width="3"/>
+  <!-- gamma: 0.53(1495) -> 0.77(727) ; 0.53(1495) -> 2.11(1148) -->
+  <line x1="180" y1="162" x2="223" y2="645" stroke="#2471a3" stroke-width="3"/>
+  <line x1="180" y1="162" x2="333" y2="400" stroke="#2471a3" stroke-width="3"/>
+  <!-- alpha: 912(0) -> 0.0218(727) -->
+  <line x1="90" y1="440" x2="104" y2="645" stroke="#2471a3" stroke-width="3"/>
+  <!-- alpha solvus down to 0.0008 at room temp (schematic) -->
+  <line x1="104" y1="645" x2="92" y2="700" stroke="#2471a3" stroke-width="2" stroke-dasharray="5,4"/>
+
+  <!-- peritectic 1495: 0.09 - 0.53 -->
+  <line x1="124" y1="162" x2="180" y2="162" stroke="#e67e22" stroke-width="3"/>
+  <!-- eutectic 1148: 2.11 - 6.69 -->
+  <line x1="333" y1="400" x2="690" y2="400" stroke="#e67e22" stroke-width="3"/>
+  <!-- eutectoid 727: 0.0218 - 6.69 -->
+  <line x1="104" y1="645" x2="690" y2="645" stroke="#e67e22" stroke-width="3"/>
+  <!-- gamma solvus 727 -> 1148 (Acm): 0.77 -> 2.11 already drawn; Fe3C vertical -->
+  <line x1="690" y1="330" x2="690" y2="645" stroke="#2471a3" stroke-width="3"/>
+  <!-- Fe3C down to room temp -->
+  <line x1="690" y1="645" x2="690" y2="700" stroke="#2471a3" stroke-width="2"/>
+
+  <!-- key points -->
+  <circle cx="90" cy="117" r="5" fill="#111"/>
+  <circle cx="124" cy="162" r="5" fill="#111"/>
+  <circle cx="152" cy="162" r="5" fill="#111"/>
+  <circle cx="180" cy="162" r="5" fill="#111"/>
+  <circle cx="223" cy="645" r="5" fill="#111"/>
+  <circle cx="333" cy="400" r="5" fill="#111"/>
+  <circle cx="455" cy="400" r="5" fill="#111"/>
+  <circle cx="104" cy="645" r="5" fill="#111"/>
+  <circle cx="90" cy="440" r="5" fill="#111"/>
+
+  <!-- labels -->
+  <text x="118" y="112" font-size="17" font-weight="bold" fill="#111">L</text>
+  <text x="300" y="300" font-size="17" font-weight="bold" fill="#111">L + γ</text>
+  <text x="560" y="352" font-size="16" font-weight="bold" fill="#111">L + Fe₃C</text>
+  <text x="145" y="185" font-size="14" fill="#111">L + δ</text>
+  <text x="108" y="300" font-size="17" font-weight="bold" fill="#111">δ</text>
+  <text x="225" y="280" font-size="17" font-weight="bold" fill="#111">γ (奥氏体, fcc)</text>
+  <text x="430" y="520" font-size="16" fill="#111">γ + Fe₃C</text>
+  <text x="105" y="560" font-size="17" font-weight="bold" fill="#111">α (铁素体, bcc)</text>
+  <text x="130" y="470" font-size="15" fill="#111">α + γ</text>
+  <text x="430" y="680" font-size="17" font-weight="bold" fill="#111">α + Fe₃C（室温：珠光体等）</text>
+  <text x="700" y="560" font-size="15" fill="#111">Fe₃C（渗碳体）</text>
+  <text x="700" y="580" font-size="13" fill="#555">w(C)=6.69%</text>
+
+  <!-- temperature markers -->
+  <line x1="90" y1="400" x2="110" y2="400" stroke="#999" stroke-width="1"/>
+  <line x1="90" y1="645" x2="110" y2="645" stroke="#999" stroke-width="1"/>
+  <line x1="90" y1="162" x2="110" y2="162" stroke="#999" stroke-width="1"/>
+
+  <!-- composition markers -->
+  <line x1="223" y1="700" x2="223" y2="660" stroke="#999" stroke-width="1"/>
+  <line x1="333" y1="700" x2="333" y2="660" stroke="#999" stroke-width="1"/>
+  <line x1="455" y1="700" x2="455" y2="660" stroke="#999" stroke-width="1"/>
+  <line x1="690" y1="700" x2="690" y2="660" stroke="#999" stroke-width="1"/>
+
+  <!-- annotations -->
+  <text x="196" y="150" font-size="12" fill="#c0392b">包晶 1495℃</text>
+  <text x="380" y="388" font-size="12" fill="#c0392b">共晶 1148℃</text>
+  <text x="390" y="636" font-size="12" fill="#c0392b">共析 727℃</text>
+  <text x="100" y="435" font-size="12" fill="#555">A₃ 912℃</text>
+</svg>

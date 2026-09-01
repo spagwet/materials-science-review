@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="640" viewBox="0 0 900 640" font-family="Microsoft YaHei, SimHei, sans-serif">
+  <title>Pb-Sn 二元相图（示意图）</title>
+  <rect x="0" y="0" width="900" height="640" fill="#ffffff"/>
+
+  <!-- axes -->
+  <line x1="90" y1="560" x2="850" y2="560" stroke="#333" stroke-width="2"/>
+  <line x1="90" y1="560" x2="90" y2="70" stroke="#333" stroke-width="2"/>
+  <text x="470" y="600" font-size="18" text-anchor="middle" fill="#111">Sn 含量 w(Sn) / %</text>
+  <text x="30" y="320" font-size="18" text-anchor="middle" fill="#111" transform="rotate(-90 30 320)">温度 / ℃</text>
+
+  <!-- tick labels -->
+  <text x="90" y="582" font-size="14" text-anchor="middle">0 (Pb)</text>
+  <text x="251" y="582" font-size="14" text-anchor="middle">19.2</text>
+  <text x="427" y="582" font-size="14" text-anchor="middle">61.9</text>
+  <text x="610" y="582" font-size="14" text-anchor="middle">97.5</text>
+  <text x="850" y="582" font-size="14" text-anchor="middle">100 (Sn)</text>
+  <text x="62" y="118" font-size="14" text-anchor="end">327</text>
+  <text x="62" y="200" font-size="14" text-anchor="end">232</text>
+  <text x="62" y="380" font-size="14" text-anchor="end">183</text>
+
+  <!-- liquidus: 327(0) -> 183(61.9) -> 232(100) -->
+  <line x1="90" y1="110" x2="427" y2="380" stroke="#c0392b" stroke-width="3"/>
+  <line x1="427" y1="380" x2="850" y2="192" stroke="#c0392b" stroke-width="3"/>
+  <!-- solidus: 327(0) -> 183(19.2); 183(97.5) -> 232(100) -->
+  <line x1="90" y1="110" x2="251" y2="380" stroke="#2471a3" stroke-width="3"/>
+  <line x1="610" y1="380" x2="850" y2="192" stroke="#2471a3" stroke-width="3"/>
+  <!-- solvus: 183(19.2) -> ~2(25); 183(97.5) -> ~99(25) -->
+  <line x1="251" y1="380" x2="97" y2="540" stroke="#2471a3" stroke-width="2" stroke-dasharray="5,4"/>
+  <line x1="610" y1="380" x2="843" y2="540" stroke="#2471a3" stroke-width="2" stroke-dasharray="5,4"/>
+  <!-- eutectic horizontal 183: 19.2 - 97.5 -->
+  <line x1="251" y1="380" x2="610" y2="380" stroke="#e67e22" stroke-width="3"/>
+
+  <!-- key points -->
+  <circle cx="90" cy="110" r="5" fill="#111"/>
+  <circle cx="251" cy="380" r="5" fill="#111"/>
+  <circle cx="427" cy="380" r="5" fill="#111"/>
+  <circle cx="610" cy="380" r="5" fill="#111"/>
+  <circle cx="850" cy="192" r="5" fill="#111"/>
+
+  <!-- labels -->
+  <text x="180" y="200" font-size="18" font-weight="bold" fill="#111">L</text>
+  <text x="290" y="310" font-size="16" fill="#111">L + α</text>
+  <text x="470" y="310" font-size="16" fill="#111">L + β</text>
+  <text x="150" y="470" font-size="18" font-weight="bold" fill="#111">α（Pb 固溶体）</text>
+  <text x="580" y="470" font-size="18" font-weight="bold" fill="#111">β（Sn 固溶体）</text>
+  <text x="400" y="520" font-size="17" font-weight="bold" fill="#111">α + β（共晶组织）</text>
+  <text x="305" y="372" font-size="12" fill="#c0392b">共晶点 183℃, 61.9%Sn</text>
+
+  <!-- composition markers -->
+  <line x1="251" y1="560" x2="251" y2="400" stroke="#999" stroke-width="1"/>
+  <line x1="427" y1="560" x2="427" y2="400" stroke="#999" stroke-width="1"/>
+  <line x1="610" y1="560" x2="610" y2="400" stroke="#999" stroke-width="1"/>
+
+  <!-- lever-rule example markers: 45% and 50% -->
+  <line x1="350" y1="560" x2="350" y2="380" stroke="#27ae60" stroke-width="2" stroke-dasharray="4,4"/>
+  <text x="330" y="540" font-size="13" fill="#27ae60">45%</text>
+  <line x1="381" y1="560" x2="381" y2="380" stroke="#8e44ad" stroke-width="2" stroke-dasharray="4,4"/>
+  <text x="395" y="540" font-size="13" fill="#8e44ad">50%</text>
+</svg>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>材料科学基础 · 复习计划</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+  line-height: 1.75; color: #1f2937; background: #f4f6fb; margin: 0;
+  padding: calc(20px + env(safe-area-inset-top)) 16px calc(50px + env(safe-area-inset-bottom));
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+.wrap { max-width: 780px; margin: 0 auto; background: #fff; border-radius: 14px;
+  border: 1px solid #e5e7eb; padding: 22px 18px; box-shadow: 0 6px 18px rgba(31,41,55,.06); }
+h1 { font-size: 22px; margin: 0 0 8px; }
+h2 { font-size: 18px; color: #1d4ed8; border-bottom: 2px solid #dbeafe; padding-bottom: 5px; margin-top: 26px; }
+h3 { font-size: 16px; color: #1f2937; margin-top: 20px; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 14px; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d5db; padding: 7px 9px; text-align: left; vertical-align: top; }
+th { background: #eff6ff; }
+tr:nth-child(even) td { background: #fafbfd; }
+img { max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 8px; margin: 10px 0; }
+blockquote { border-left: 4px solid #93c5fd; background: #eff6ff; margin: 12px 0; padding: 8px 12px; color: #374151; border-radius: 0 8px 8px 0; }
+code { background: #f3f4f6; padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+pre { background: #f3f4f6; padding: 10px; border-radius: 8px; overflow-x: auto; }
+a { color: #2563eb; }
+.back { display: inline-block; margin-bottom: 14px; color: #2563eb; text-decoration: none; font-size: 14px; }
+ul, ol { padding-left: 22px; }
+hr { border: none; border-top: 1px solid #e5e7eb; margin: 22px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="index.html">← 返回首页</a>
+<p>﻿# 材料科学基础 · 复习计划</p>
+<blockquote>
+<p>配套材料：<code>复习笔记.md</code>（精读用）、<code>闪卡.html</code>（自测用）、<code>anki_导入.csv</code>（间隔重复用）、<code>images/</code>（相图）。<br />
+题型分布：选择题（8 章）、名词解释、简答题、综合计算题。复习重点：第 3、4、7 章占分最多。</p>
+</blockquote>
+<hr />
+<h2>使用顺序建议</h2>
+<ol>
+<li><strong>先通读</strong> <code>复习笔记.md</code> 对应章节（20～30 分钟）；</li>
+<li><strong>再刷闪卡</strong>：选择题组 → 名词解释组 → 公式与数字组；</li>
+<li><strong>睡前复盘</strong>：把「需复习」的卡再点一遍，或过一遍笔记最后的「全书速记卡」；</li>
+<li><strong>定期做计算题</strong>：杠杆定律、渗碳时间、临界晶核这三类必须手写步骤。</li>
+</ol>
+<h2>14 天计划（每天 60～90 分钟）</h2>
+<table>
+<thead>
+<tr>
+<th>天数</th>
+<th>内容</th>
+<th>任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第 1 天</td>
+<td>第 1 章 原子键合 + 第 2 章 晶体结构</td>
+<td>读笔记 → 刷对应选择题 → 默写 4 个量子数、5 种键、晶胞原子数与堆积系数</td>
+</tr>
+<tr>
+<td>第 2 天</td>
+<td>第 3 章 晶体缺陷（上）</td>
+<td>读笔记 → 刷选择题 → 背单位位错、位错能量公式、缺陷分类</td>
+</tr>
+<tr>
+<td>第 3 天</td>
+<td>第 3 章 晶体缺陷（下）</td>
+<td>精读位错运动与弗兰克-瑞德源 → 口头复述「滑移/攀移/交滑移」</td>
+</tr>
+<tr>
+<td>第 4 天</td>
+<td>第 4 章 塑性变形与再结晶（上）</td>
+<td>刷选择题 → 默写滑移 vs 孪生 6 条对比</td>
+</tr>
+<tr>
+<td>第 5 天</td>
+<td>第 4 章（下）+ 第 5 章 扩散</td>
+<td>背菲克两定律 → 口头回答「为什么渗碳选奥氏体区」</td>
+</tr>
+<tr>
+<td>第 6 天</td>
+<td>第 6 章 单元系相变原理</td>
+<td>背 r<em>、ΔG</em> 公式 → 口头讲清均匀/非均匀形核异同</td>
+</tr>
+<tr>
+<td>第 7 天</td>
+<td>第 7 章 二元系相图（上）</td>
+<td>精读 Fe-Fe3C 相图 → 默写 3 个温度和 7 类合金室温组织</td>
+</tr>
+<tr>
+<td>第 8 天</td>
+<td>第 7 章（下）</td>
+<td>手写 Pb-Sn 杠杆定律两道例题 → 背渗碳体三种形态</td>
+</tr>
+<tr>
+<td>第 9 天</td>
+<td>第 8 章 三元系相图</td>
+<td>背相律与四相平衡区 → 手算三元合金成分例题</td>
+</tr>
+<tr>
+<td>第 10 天</td>
+<td>全面复习第 1～4 章</td>
+<td>闪卡「需复习」清零 → 做 10 道错题重做</td>
+</tr>
+<tr>
+<td>第 11 天</td>
+<td>全面复习第 5～8 章</td>
+<td>同上 → 过一遍「高频简答题速答清单」</td>
+</tr>
+<tr>
+<td>第 12 天</td>
+<td>计算题专练</td>
+<td>渗碳时间、临界晶核、杠杆定律、三元成分各 1～2 题，全程手写</td>
+</tr>
+<tr>
+<td>第 13 天</td>
+<td>模拟自测</td>
+<td>闪卡全组自测一遍，统计正确率；低于 80% 的章节回炉</td>
+</tr>
+<tr>
+<td>第 14 天</td>
+<td>考前冲刺</td>
+<td>只看「全书速记卡」+ 相图 → 睡前快速过「需复习」卡片</td>
+</tr>
+</tbody>
+</table>
+<h2>如果只有 5 天</h2>
+<table>
+<thead>
+<tr>
+<th>天数</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第 1 天</td>
+<td>第 1、2、3 章：笔记 + 选择题 + 名词卡</td>
+</tr>
+<tr>
+<td>第 2 天</td>
+<td>第 4、5 章：笔记 + 选择题 + 名词卡</td>
+</tr>
+<tr>
+<td>第 3 天</td>
+<td>第 6、7 章：笔记 + 选择题 + 相图与杠杆定律计算</td>
+</tr>
+<tr>
+<td>第 4 天</td>
+<td>第 8 章 + 全部计算题手写一遍</td>
+</tr>
+<tr>
+<td>第 5 天</td>
+<td>全组自测 + 只背速记卡和错题</td>
+</tr>
+</tbody>
+</table>
+<h2>如果只有 1 天</h2>
+<p>只做三件事：</p>
+<ol>
+<li>过一遍笔记的「全书速记卡」和「高频简答题速答清单」（20 分钟）；</li>
+<li>闪卡「选择题」组自测一遍，错题当场看笔记（40 分钟）；</li>
+<li>手写 Fe-Fe3C 相图关键点和 Pb-Sn 杠杆定律例题（20 分钟）。</li>
+</ol>
+<hr />
+<h2>答题技巧</h2>
+<p><strong>选择题</strong></p>
+<ul>
+<li>先排除绝对化表述（“总是”“一定”“都”）——本套题里这类选项常是错的（如“总是使晶格常数增大”）。</li>
+<li>数字题先回忆口诀：bcc 2 个 68%、fcc 4 个 74%、727/1148/1495。</li>
+</ul>
+<p><strong>名词解释</strong></p>
+<ul>
+<li>用「相同点 + 不同点」两段式答题（讲义答案就是这个套路，照格式背最省力）。</li>
+<li>字数不够就补例子（如间隙固溶体举例：C 在 γ-Fe 中）。</li>
+</ul>
+<p><strong>简答题</strong></p>
+<ul>
+<li>分点作答，先结论后理由。</li>
+<li>高频题（渗碳为什么选奥氏体区、滑移 vs 孪生、均匀 vs 非均匀形核、成分过冷）务必能脱稿复述。</li>
+</ul>
+<p><strong>计算题</strong></p>
+<ul>
+<li>先写公式，再代数据，最后写单位。</li>
+<li>杠杆定律：先判断是哪两相/哪两组织（看相图水平线两端），再套 <code>(远端-合金)/(远端-近端)</code>。</li>
+<li>渗碳题：确认 Ws、W0、W、x、D 五个量，再查误差函数表。</li>
+</ul>
+<hr />
+<h2>Anki 导入方法</h2>
+<ol>
+<li>打开 Anki → 文件 → 导入；</li>
+<li>选择 <code>anki_导入.csv</code>，字段分隔选「逗号」，文本编码选「UTF-8」；</li>
+<li>映射字段：第 1 列 → Front（正面），第 2 列 → Back（背面），第 3 列 → Tags（标签）；</li>
+<li>导入后每天按 Anki 的间隔重复节奏刷即可（建议每天 15 分钟新卡 + 复习卡）。</li>
+</ol>
+<blockquote>
+<p>提示：<code>闪卡.html</code> 的进度只保存在本机浏览器；Anki 卡组的进度随 AnkiWeb 同步，适合手机碎片时间复习。</p>
+</blockquote>
+</div>
+</body>
+</html>

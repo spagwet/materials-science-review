@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>材料科学基础 · 闪卡学习</title>
+<style>
+  :root {
+    --bg: #f4f6fb;
+    --card: #ffffff;
+    --ink: #1f2937;
+    --sub: #6b7280;
+    --accent: #3b82f6;
+    --accent-soft: #dbeafe;
+    --good: #16a34a;
+    --good-soft: #dcfce7;
+    --bad: #dc2626;
+    --bad-soft: #fee2e2;
+    --warn: #d97706;
+    --warn-soft: #fef3c7;
+    --border: #e5e7eb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+    background: var(--bg); color: var(--ink); min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center;
+    padding: calc(18px + env(safe-area-inset-top)) 12px calc(40px + env(safe-area-inset-bottom));
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  header { width: 100%; max-width: 780px; text-align: center; }
+  h1 { font-size: 22px; margin-bottom: 2px; }
+  .subtitle { color: var(--sub); font-size: 13px; margin-bottom: 14px; }
+
+  .tabs { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
+  .tab {
+    border: 1px solid var(--border); background: var(--card); color: var(--ink);
+    padding: 8px 14px; border-radius: 20px; cursor: pointer; font-size: 14px;
+    transition: all .15s; min-height: 42px;
+  }
+  .tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .tab .cnt { opacity: .75; font-size: 12px; margin-left: 4px; }
+
+  .controls { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
+  .btn {
+    border: 1px solid var(--border); background: var(--card); color: var(--ink);
+    padding: 7px 13px; border-radius: 10px; cursor: pointer; font-size: 13px;
+    transition: all .15s; min-height: 40px;
+  }
+  .btn:hover { background: var(--accent-soft); border-color: var(--accent); }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { filter: brightness(1.08); }
+  .btn.small { padding: 4px 10px; font-size: 12px; }
+  .btn:disabled { opacity: .45; cursor: not-allowed; }
+
+  .stats {
+    display: flex; gap: 14px; justify-content: center; font-size: 13px;
+    color: var(--sub); margin-bottom: 14px; flex-wrap: wrap;
+  }
+  .stats b { color: var(--ink); }
+
+  .filters { display: flex; gap: 6px; justify-content: center; margin-bottom: 14px; }
+  .chip {
+    border: 1px solid var(--border); background: transparent; color: var(--sub);
+    padding: 4px 12px; border-radius: 14px; cursor: pointer; font-size: 12px;
+  }
+  .chip.active { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+
+  .card-zone { width: 100%; max-width: 780px; perspective: 1200px; }
+  .card {
+    position: relative; width: 100%; min-height: 300px;
+    background: var(--card); border-radius: 18px; border: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(31,41,55,.08);
+    cursor: pointer; transition: transform .45s; transform-style: preserve-3d;
+  }
+  .card.flipped { transform: rotateY(180deg); }
+  .face {
+    position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    display: flex; flex-direction: column; padding: 30px 28px; border-radius: 18px;
+  }
+  .front { background: var(--card); }
+  .back {
+    background: var(--accent-soft); transform: rotateY(180deg);
+    overflow-y: auto;
+  }
+  .cat { font-size: 12px; color: var(--accent); font-weight: 600; letter-spacing: .5px; margin-bottom: 10px; }
+  .q { font-size: 19px; line-height: 1.7; flex: 1; }
+  .a { font-size: 16px; line-height: 1.75; color: var(--ink); white-space: pre-wrap; }
+  .hint { color: var(--sub); font-size: 12px; margin-top: 14px; text-align: center; }
+
+  .actions { display: flex; gap: 10px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+  .mark { padding: 11px 22px; border: none; border-radius: 12px; font-size: 15px; cursor: pointer; color: #fff; }
+  .mark.good { background: var(--good); }
+  .mark.bad { background: var(--warn); }
+  .mark:hover { filter: brightness(1.08); }
+
+  .options { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+  .opt {
+    text-align: left; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border);
+    background: var(--card); cursor: pointer; font-size: 15px; line-height: 1.55; transition: all .15s;
+    min-height: 48px;
+  }
+  .opt:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-soft); }
+  .opt.correct { background: var(--good-soft); border-color: var(--good); color: var(--good); font-weight: 600; }
+  .opt.wrong { background: var(--bad-soft); border-color: var(--bad); color: var(--bad); }
+  .opt:disabled { cursor: default; }
+  .feedback {
+    margin-top: 14px; padding: 12px 14px; border-radius: 12px; font-size: 14px; line-height: 1.6;
+    display: none; max-height: 55vh; overflow-y: auto;
+  }
+  .feedback.show { display: block; }
+  .feedback.ok { background: var(--good-soft); color: #14532d; }
+  .feedback.no { background: var(--bad-soft); color: #7f1d1d; }
+  .progress-bar { height: 6px; background: var(--border); border-radius: 3px; margin-top: 12px; overflow: hidden; }
+  .progress-bar > div { height: 100%; background: var(--accent); border-radius: 3px; transition: width .3s; }
+  footer { color: var(--sub); font-size: 12px; margin-top: 22px; text-align: center; max-width: 640px; line-height: 1.7; }
+  @media (max-width: 560px) {
+    h1 { font-size: 19px; }
+    .q { font-size: 17px; }
+    .a { font-size: 15px; }
+    .card { min-height: 250px; }
+    .face { padding: 22px 18px; }
+    .mark { padding: 13px 18px; width: 46%; max-width: 220px; }
+    .actions { gap: 12px; }
+    .tab { min-height: 44px; }
+    .chip { min-height: 36px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>材料科学基础 · 闪卡学习</h1>
+  <div class="subtitle">共 8 章 · 进度自动保存在本机浏览器（localStorage）</div>
+  <div class="tabs" id="deckTabs"></div>
+  <div class="controls">
+    <button class="btn" id="modeBtn">模式：浏览</button>
+    <button class="btn" id="shuffleBtn">随机打乱</button>
+    <button class="btn" id="resetBtn">重置本组进度</button>
+  </div>
+  <div class="stats" id="stats"></div>
+  <div class="filters" id="filters"></div>
+</header>
+
+<div class="card-zone">
+  <div class="card" id="card">
+    <div class="face front" id="frontFace"></div>
+    <div class="face back" id="backFace"></div>
+  </div>
+  <div class="actions" id="actions"></div>
+</div>
+<div class="progress-bar"><div id="pbar"></div></div>
+
+<footer>使用建议：先「浏览」过一遍 → 用「选择题自测」检验 → 每天把「需复习」的卡片过一遍。<br>进度按卡片保存，换电脑或清浏览器缓存会丢失。</footer>
+
+<script>
+"use strict";
+
+/* ============ 数据 ============ */
+const MCQS = [
+{c:"第1章 原子键合",q:"决定电子能量及与核的平均距离的量子数是",o:["主量子数","磁量子数","轨道角动量量子数","自旋量子数"],a:0,n:"主量子数 n 决定电子能量及与核的平均距离；l 决定轨道形状，m 决定空间取向，ms 决定自旋方向。"},
+{c:"第1章 原子键合",q:"核外电子排布时优先排布在能量（　）的轨道",o:["最高","最低","适中","以上都不是"],a:1,n:"按能量最低原理，电子优先占据能量最低的轨道，先低后高依次填充。"},
+{c:"第1章 原子键合",q:"属于物理键的是",o:["共价键","范德华力","离子键","金属键"],a:1,n:"物理键指范德华力（分子间作用力）；共价键、离子键、金属键都属于化学键。"},
+{c:"第1章 原子键合",q:"高分子材料中的 C-H 化学键属于",o:["氢键","离子键","共价键","分子间作用力"],a:2,n:"C-H 键是原子间共用电子对形成的共价键；氢键和分子间作用力作用于分子之间，不是分子内部。"},
+{c:"第1章 原子键合",q:"极化可使键性由（　）过渡，最终使晶体结构类型发生变化",o:["共价键向离子键","离子键向共价键","金属键向共价键","金属键向离子键"],a:1,n:"极化使离子电子云变形、键的共价成分增加，所以键性由离子键向共价键过渡，晶体结构类型随之变化。"},
+{c:"第1章 原子键合",q:"具有良好的导电性和导热性能的材料是",o:["无机非金属材料","合成材料","复合材料","金属材料"],a:3,n:"金属靠自由电子（电子气）导电导热，性能最好；陶瓷、聚合物没有自由电子。"},
+{c:"第1章 原子键合",q:"不具有良好的导电性和导热性能的材料是",o:["铜","铁","聚乙烯塑料","铝"],a:2,n:"聚乙烯是高分子聚合物，无自由电子，不导电不导热；铜、铁、铝都是金属。"},
+
+{c:"第2章 晶体结构",q:"空间点阵的特点是",o:["阵点周围环境都相同，在空间的位置一定","阵点周围环境不同，在空间的位置一定","阵点周围环境都相同，在空间的位置无序","阵点周围环境不同，在空间的位置无序"],a:0,n:"空间点阵要求阵点周围环境完全相同且空间位置确定，这是点阵区别于一般质点排列的本质。"},
+{c:"第2章 晶体结构",q:"某晶面在 x、y、z 轴上的截距分别为 3a、2b、c，晶面指数为",o:["（236）","（321）","[236]","[321]"],a:0,n:"截距取倒数：1/3、1/2、1，通分×6 得 (236)；晶面指数用圆括号。"},
+{c:"第2章 晶体结构",q:"某晶面在 x、y、z 轴上的截距分别为 a、2b、2c，晶面指数为",o:["（122）","（211）","[122]","[211]"],a:1,n:"截距取倒数：1、1/2、1/2，×2 得 (211)。"},
+{c:"第2章 晶体结构",q:"符号 [uvw] 表示",o:["晶面指数","晶面族","晶向指数","晶向族"],a:2,n:"[uvw] 是晶向指数（方括号），(hkl) 是晶面指数（圆括号）。"},
+{c:"第2章 晶体结构",q:"符号 <uvw> 表示",o:["晶面指数","晶面族","晶向指数","晶向族"],a:3,n:"<uvw> 表示晶向族，{hkl} 表示晶面族。"},
+{c:"第2章 晶体结构",q:"在立方晶系中，相同指数的晶面和晶向",o:["平行","呈 45 度夹角","垂直","以上都不是"],a:2,n:"立方晶系中 (hkl) 与 [hkl] 互相垂直，如 (100)⊥[100]。"},
+{c:"第2章 晶体结构",q:"每个体心立方晶胞含有（　）个原子",o:["2","4","6","8"],a:0,n:"bcc 晶胞：8 个顶点各占 1/8 + 1 个体心原子 = 2 个。"},
+{c:"第2章 晶体结构",q:"一个体心立方晶胞含有（　）个原子",o:["3","2","4","1"],a:1,n:"体心立方：8×1/8（顶点）+ 1（体心）= 2 个原子。"},
+{c:"第2章 晶体结构",q:"等径球体作紧密堆积，其堆积系数为",o:["68%","80%","74%","64%"],a:2,n:"等径球最紧密堆积（fcc/hcp）堆积系数 74%；bcc 为 68%。"},
+{c:"第2章 晶体结构",q:"按（　）层序堆积构成六方最紧密堆积",o:["ABAB…","ABCABC…","ABBABB…","AABAAB…"],a:0,n:"ABAB… 两层一重复是六方最紧密堆积（hcp）；ABCABC… 是面心立方（fcc）。"},
+{c:"第2章 晶体结构",q:"八面体和四面体两种间隙分别由（　）个等大球体构成",o:["8 和 4","4 和 8","4 和 6","6 和 4"],a:3,n:"八面体间隙由 6 个球围成，四面体间隙由 4 个球围成（记：八面=6，四面=4）。"},
+{c:"第2章 晶体结构",q:"金刚石很硬而石墨很软，原因是",o:["晶体结构不同","两者成分不同","两者内部组织不同","生产制备工艺不同"],a:0,n:"金刚石是 sp³ 共价键三维骨架，极硬；石墨层内共价、层间范德华力弱，很软。成分相同，结构不同。"},
+
+{c:"第3章 晶体缺陷",q:"下列缺陷中属于点缺陷的是",o:["空位","位错","晶界","相界"],a:0,n:"点缺陷（0 维）：空位、间隙原子、置换原子；位错是线缺陷，晶界/相界是面缺陷。"},
+{c:"第3章 晶体缺陷",q:"实际晶体的线缺陷表现为",o:["空位","间隙原子","位错","晶界"],a:2,n:"线缺陷（1 维）即各种位错，表现为位错线。"},
+{c:"第3章 晶体缺陷",q:"下列晶体缺陷中属于面缺陷的是",o:["空位","位错","晶界","间隙原子"],a:2,n:"面缺陷（2 维）：晶界、相界、孪晶界；空位和间隙原子是点缺陷。"},
+{c:"第3章 晶体缺陷",q:"氮、氧在金属中一般占据间隙位置，这是因为",o:["金属中间隙半径大于氮氧原子半径","氮、氧都是气体","氮、氧原子半径较小，能挤入间隙位置","易于形成间隙化合物"],a:2,n:"间隙固溶体要点：溶质原子半径小，能挤入金属的间隙位置（间隙尺寸本身小于原子半径）。"},
+{c:"第3章 晶体缺陷",q:"金属中溶质原子或杂质原子的存在",o:["总是使晶格常数增大","总是使晶格常数减小","可能使晶格常数增大也可能减小","对晶格常数没有影响"],a:2,n:"间隙原子使晶格膨胀，置换原子视相对大小而定，所以晶格常数可能增大也可能减小。"},
+{c:"第3章 晶体缺陷",q:"金属与电负性较强的 IVA、VA、VIA 族元素按原子价规律形成的化合物称为",o:["电子化合物","正常价化合物","间隙化合物","以上都不是"],a:1,n:"按原子价规律形成的是正常价化合物；按电子浓度规律形成的是电子化合物。"},
+{c:"第3章 晶体缺陷",q:"电子化合物中 A 组元质量分数超过 60%，该相晶体结构",o:["与 A 相同","与 B 相同","与 A、B 都不相同","不确定"],a:2,n:"电子化合物的结构由电子浓度决定，与 A、B 组元的结构都不同。"},
+{c:"第3章 晶体缺陷",q:"关于位错性质，下列说法不正确的是",o:["位错不一定是直线","位错是已滑移区和未滑移区的边界","位错可以中断于晶体内部","位错不能中断于晶体内部"],a:2,n:"位错不能中断于晶体内部，只能终止于表面、晶界或形成闭合位错环，所以 C 说法错误。"},
+{c:"第3章 晶体缺陷",q:"混合型位错的位错线与伯氏矢量",o:["垂直","平行","呈一定角度","以上都不是"],a:2,n:"刃位错 b⊥位错线，螺位错 b∥位错线，混合位错 b 与位错线呈一定角度。"},
+{c:"第3章 晶体缺陷",q:"下列说法不正确的是",o:["扩展位错是线缺陷","螺位错旋向不变而刃位错正负反向","一个位错环不可能处处是刃位错，也不可能处处都是螺位错","柏氏矢量是点阵的平移矢量"],a:2,n:"位错环可以处处是刃位错（如棱柱位错环），所以『不可能处处是刃/螺』的说法不正确。"},
+{c:"第3章 晶体缺陷",q:"面心立方单位位错的伯氏矢量大小是",o:["√2/2·a","√3/2·a","√3/3·a","a/2"],a:0,n:"b=a/2⟨110⟩，|b|=√[(a/2)²+(a/2)²]=√2/2·a。"},
+{c:"第3章 晶体缺陷",q:"面心立方单位位错的伯氏矢量是",o:["a/2<110>","a<100>","a/2<111>","a/3<111>"],a:0,n:"面心立方最密方向是 ⟨110⟩，单位位错 b=a/2⟨110⟩。"},
+{c:"第3章 晶体缺陷",q:"体心立方单位位错的伯氏矢量是",o:["a/2<110>","a<100>","a/2<111>","a/3<111>"],a:2,n:"体心立方最密方向是 ⟨111⟩，单位位错 b=a/2⟨111⟩，|b|=√3/2·a。"},
+
+{c:"第4章 塑性变形与再结晶",q:"密排六方金属的滑移系有（　）个",o:["12","6","3","4"],a:2,n:"hcp 只有基面 1 个滑移面 × 3 个滑移方向 = 3 个滑移系，所以塑性差、易孪生。"},
+{c:"第4章 塑性变形与再结晶",q:"金属晶体塑性变形方式主要以（　）为主",o:["再结晶","滑移","熔化","孪生"],a:1,n:"塑性变形主要靠位错滑移完成，孪生只起辅助作用。"},
+{c:"第4章 塑性变形与再结晶",q:"在切应力作用下，螺型位错可以进行",o:["攀移","滑移","攀移和滑移","以上都不是"],a:1,n:"螺位错没有多余半原子面，不能攀移，只能滑移；攀移是刃位错特有的运动。"},
+{c:"第4章 塑性变形与再结晶",q:"位错在热缺陷作用下垂直滑移面的运动称为",o:["攀移","滑移","增殖","减少"],a:0,n:"攀移借助热缺陷（空位/间隙原子扩散）在垂直于滑移面方向运动，是刃位错的行为。"},
+{c:"第4章 塑性变形与再结晶",q:"位错的滑移是指位错在（　）作用下在滑移面上的运动",o:["外力","热应力","化学力","结构应力"],a:0,n:"滑移由外加切应力驱动，位错在滑移面上运动，产生永久（塑性）变形。"},
+{c:"第4章 塑性变形与再结晶",q:"晶体转动使原有利于滑移的晶面变成不利于滑移，这种现象称为",o:["物理硬化","几何硬化","加工硬化","不确定"],a:1,n:"滑移时晶体转动使晶面远离 45°，取向因子变小、分切应力变小，滑移变难，即几何硬化。"},
+{c:"第4章 塑性变形与再结晶",q:"加工硬化现象经过（　）可以消除",o:["再结晶","滑移","结晶","以上都不是"],a:0,n:"再结晶形成新的等轴晶、位错密度大幅下降，可消除加工硬化；回复只能降低残余应力。"},
+
+{c:"第5章 扩散",q:"菲克第一定律要求各处浓度及浓度梯度不随（　）改变",o:["距离","时间","温度","时间和温度"],a:1,n:"稳态扩散指浓度及浓度梯度不随时间改变；随时间改变的是非稳态，用菲克第二定律。"},
+{c:"第5章 扩散",q:"菲克第二定律的误差函数解适用于",o:["无限长或半无限长扩散偶","衰减薄膜源","成分偏析的均匀化","以上都不是"],a:0,n:"误差函数解用于无限长/半无限长扩散偶（如渗碳）；衰减薄膜源用高斯解，均匀化用傅里叶级数解。"},
+{c:"第5章 扩散",q:"C 在 Fe 中的扩散以（　）为主",o:["间隙扩散","空位扩散","直接换位扩散","以上都不是"],a:0,n:"C 原子半径小，在 Fe 中主要以间隙扩散方式迁移，速度也快。"},
+{c:"第5章 扩散",q:"固体材料中原子扩散的驱动力是",o:["化学位梯度","浓度梯度","温度梯度","应力梯度"],a:0,n:"扩散的真正驱动力是化学位梯度；上坡扩散（低浓度→高浓度）就是浓度梯度解释不了的例子。"},
+{c:"第5章 扩散",q:"体扩散、晶界扩散、表面扩散的扩散系数关系是",o:["DS<DB<DL","DL<DB<DS","DL<DS<DB","以上都不是"],a:1,n:"扩散路径快慢：表面 > 晶界 > 晶内，即 DS>DB>DL。"},
+{c:"第5章 扩散",q:"柯肯达尔效应中界面向 A 试样方向移动，则",o:["A 组元的扩散速率大于 B 组元","A 组元的扩散速率小于 B 组元","A、B 扩散速率相同","A 组元溶质浓度大于 B 组元"],a:0,n:"柯肯达尔效应：界面移向扩散速率大的一方；界面移向 A 侧说明 A 组元扩散更快。"},
+
+{c:"第6章 单元系相变原理",q:"均匀形核时随着过冷度的增加，形核率",o:["增加","降低","先增加后降低","以上都不是"],a:2,n:"过冷度增大：形核驱动力增大但原子迁移能力下降，两个因素竞争，形核率先升后降。"},
+{c:"第6章 单元系相变原理",q:"奥氏体转变是（　）相变",o:["一级","二级","三级","以上都不是"],a:0,n:"奥氏体转变（如 γ→α+P）伴随体积、熵、焓的突变，属于一级相变。"},
+{c:"第6章 单元系相变原理",q:"形核功 ΔG* 与临界晶核界面能 ΔG 的关系是",o:["ΔG=3ΔG*","ΔG=1/3ΔG*","ΔG=ΔG*","ΔG=2/3ΔG*"],a:0,n:"临界核界面能占形核功的 3 倍：ΔG*=1/3·界面能，即 ΔG=3ΔG*。"},
+{c:"第6章 单元系相变原理",q:"核胚半径等于临界尺寸时，体系的自由能变化",o:["大于零","等于零","小于零","不确定"],a:0,n:"r=r* 时自由能处于极大值 ΔG*（大于零）；只有 r>r* 后自由能才开始下降。"},
+{c:"第6章 单元系相变原理",q:"铸锭凝固时大部分结晶潜热通过液相散失，固态组织主要为",o:["树枝晶","柱状晶","胞状晶","等轴晶"],a:0,n:"潜热经液相散失使界面前沿过冷增大，有利于枝晶生长，组织呈树枝晶。"},
+
+{c:"第7章 二元系相图",q:"二元合金凝固时先凝固的固相中高熔点组元含量",o:["较高","较低","相同","以上都不是"],a:0,n:"平衡凝固时先凝固的固相富高熔点组元（相图上固相线偏向高温侧）。"},
+{c:"第7章 二元系相图",q:"包晶转变（L+α→β）时高熔点组元",o:["由 L 和 α 同时向 β 内扩散","由 L 向 α 内扩散","由 L 向 β 内扩散","由 α 向 β 内扩散"],a:3,n:"包晶转变中 β 在 α 表面形核长大，高熔点组元由 α 相向 β 相内扩散。"},
+{c:"第7章 二元系相图",q:"Pb-Sn 共晶组织 α、β 两相共存的原因是",o:["α 和 β 的自由能相等","α 内 Pb 的化学势与 β 内 Pb 的化学势相等","α 内 Pb 的化学势与 β 内 Sn 的化学势相等","α 内 Sn 的化学势与 β 内 Pb 的化学势相等"],a:1,n:"两相平衡条件：同一组元在两相中的化学势相等，即 μPb(α)=μPb(β)。"},
+{c:"第7章 二元系相图",q:"杠杆法则只能用于",o:["单相区中","两相区中","三相平衡水平线上","三相区中"],a:1,n:"杠杆定律只能在两相区内计算两相相对量；单相区和三相平衡线上都不适用。"},
+{c:"第7章 二元系相图",q:"合金非平衡凝固时先共晶固溶体往往形成",o:["柱状晶","细等轴晶","树枝状晶","以上都不是"],a:2,n:"非平衡凝固过冷大、易形成枝晶，先共晶固溶体呈树枝状晶。"},
+{c:"第7章 二元系相图",q:"下列碳钢组织中包含两种相的是",o:["铁素体","奥氏体","珠光体","渗碳体"],a:2,n:"珠光体 = 铁素体 + 渗碳体的机械混合物（两种相）；铁素体、奥氏体、渗碳体都是单相。"},
+
+{c:"第8章 三元系相图",q:"恒压条件下三元合金最多可以有（　）相共存",o:["2","3","4","以上都不是"],a:2,n:"恒压相律 F=C-P+1=4-P，F=0 时 P 最大为 4。"},
+{c:"第8章 三元系相图",q:"三相区等温截面为三角形，其顶点触及",o:["单相区","双相区","三相区","三相平衡水平线"],a:0,n:"三相区等温截面为连接三角形，三角形顶点与单相区相接（相区接触法则）。"},
+{c:"第8章 三元系相图",q:"三相区等温截面为三角形，其顶点触及（重复题）",o:["单相区","双相区","三相区","三相平衡水平线"],a:0,n:"与上题相同：三相区等温截面顶点触及单相区。"},
+{c:"第8章 三元系相图",q:"三元相图的垂直截面图可以",o:["分析相成分变化规律","分析材料的平衡凝固过程","用杠杆定律计算各相相对量","分析各相的热力学参数"],a:1,n:"垂直截面只能反映温度-成分关系、分析平衡凝固过程；算相对量必须用等温截面+杠杆定律。"}
+];
+
+const TERMS = [
+{c:"名词解释 · 第1章",q:"金属键与共价键的异同",a:"相同点：成键方式都是电子共有。\n不同点：共有范围不同——金属键中电子属所有原子共有（正离子+自由电子静电吸引）；共价键中价电子只属相邻若干原子共有。"},
+{c:"名词解释 · 第2章",q:"晶体与非晶体",a:"相同点：都是固态物体。\n不同点：晶体原子规则排列，各向异性，有固定熔点；非晶体原子无序排列，各向同性，无固定熔点。"},
+{c:"名词解释 · 第3章",q:"间隙固溶体与间隙化合物",a:"相同点：小原子都位于间隙位置。\n不同点：小原子溶入后仍保留大原子点阵的为间隙固溶体；改变了大原子点阵、形成新相的为间隙化合物（间隙相）。"},
+{c:"名词解释 · 第3章",q:"全位错与不全位错",a:"相同点：都是线缺陷（位错）。\n不同点：伯氏矢量等于点阵矢量或其整数倍的为全位错（滑移后原子排列不变）；不等于点阵矢量整数倍的为不全位错。"},
+{c:"名词解释 · 第3章",q:"小角度晶界与大角度晶界",a:"都是晶粒之间的界面。\n按相邻晶粒位相差区分：小于 10° 为小角度晶界，大于 10° 为大角度晶界。"},
+{c:"名词解释 · 第3章",q:"共格相界",a:"界面上的原子同时位于两相晶格的结点上，两相晶格彼此衔接，界面原子为两者共有。"},
+{c:"名词解释 · 第4章",q:"取向因子（施密特因子）",a:"τ=σ·cosφ·cosλ 中的 cosφ·cosλ。取向因子越大，分切应力越大；45° 时最大为 0.5。"},
+{c:"名词解释 · 第4章",q:"加工硬化（冷作硬化）",a:"金属随冷塑变形程度增大，强度和硬度逐渐升高，塑性和韧性逐渐降低的现象。"},
+{c:"名词解释 · 第4章",q:"形变织构",a:"塑性变形中晶粒的滑移面和滑移方向向主形变方向转动，使原来取向不同的晶粒在空间取向上呈现规律性（择优取向）的组织状态。"},
+{c:"名词解释 · 第4章",q:"变形织构与再结晶织构",a:"相同点：都是择优取向的晶体结构。\n不同点：由塑性变形直接引起的是变形织构；具有变形织构的金属再结晶后新晶粒仍保持择优取向，称为再结晶织构。"},
+{c:"名词解释 · 第5章",q:"非稳态扩散",a:"质量浓度随时间而变化的扩散。"},
+{c:"名词解释 · 第5章",q:"柯肯达尔效应",a:"界面两侧两种原子相互扩散且速率不等时，原始界面发生移动，界面移向原子扩散速率较大的一方。"},
+{c:"名词解释 · 第5章",q:"上坡扩散与下坡扩散",a:"相同点：驱动力都是化学位梯度。\n不同点：扩散方向不同——上坡扩散由低浓度处向高浓度处；下坡扩散由高浓度处向低浓度处。"},
+{c:"名词解释 · 第5章",q:"反应扩散与原子扩散",a:"相同点：驱动力都是化学位梯度。\n不同点：有无新相产生——扩散使溶质超过固溶体极限形成新相的是反应扩散（相变扩散）；基体晶格不变、无新相的是原子扩散。"},
+{c:"名词解释 · 第6章",q:"均匀形核与非均匀形核",a:"相同点：驱动力阻力相同、临界半径相同、都要形核功、都以结构起伏和能量起伏为基础、都要临界过冷度。\n不同点：均匀形核靠起伏在过冷液相中自发形核；非均匀形核以固体杂质或器壁为核心，界面能小、形核功小，更易进行。"},
+{c:"名词解释 · 第6章",q:"光滑界面",a:"从原子尺度看液固界面光滑平整、两相截然分开；光学显微镜下由曲折的若干小平面组成，又称小平面界面。"},
+{c:"名词解释 · 第7章",q:"相与组织",a:"相同点：都是材料的组成部分。\n不同点：相是同一聚集状态、同一晶体结构和性质并以界面隔开的均匀组成部分；组织是由若干相以一定数量、形状、尺寸、分布组合成的具有独特形态的部分。组织侧重微观结构，相侧重存在状态。"},
+{c:"名词解释 · 第7章",q:"非平衡凝固",a:"凝固中液固两相成分偏离液固相线，凝固需在更低温度完成，凝固后固体成分不均匀的结晶过程。"},
+{c:"名词解释 · 第7章",q:"奥氏体",a:"碳溶于 γ-Fe 中形成的间隙固溶体，面心立方结构，用 A 或 γ 表示。"},
+{c:"名词解释 · 第7章",q:"渗碳体",a:"铁和碳形成的具有复杂晶格的间隙化合物，硬度高、塑性差（延伸率≈0）；钢中呈片状或网络状，莱氏体中呈连续基体（有时鱼骨状）。"}
+];
+
+const FORMULAS = [
+{c:"公式",q:"菲克第一定律（适用条件？）",a:"J = -D·dρ/dx\n适用稳态扩散：浓度及浓度梯度不随时间变化。"},
+{c:"公式",q:"菲克第二定律（适用条件？）",a:"∂ρ/∂t = D·∂²ρ/∂x²\n适用非稳态扩散：浓度随时间变化。"},
+{c:"公式",q:"渗碳（误差函数解）公式",a:"(Ws - W)/(Ws - W0) = erf( x/(2√(Dt)) )\nWs 表面浓度，W0 初始浓度，W 深度 x 处浓度。"},
+{c:"公式",q:"Schmid 定律",a:"τ = σ·cosφ·cosλ\ncosφ·cosλ 为取向因子，45° 时最大 0.5。"},
+{c:"公式",q:"临界晶核半径 r*",a:"r* = 2σ·Tm/(Lm·ΔT)（或 2σ/ΔGv）\nσ 固液界面能，Lm 熔化热，ΔT 过冷度。"},
+{c:"公式",q:"临界形核功 ΔG*",a:"ΔG* = 16πσ³/(3ΔGv²)\n临界核的界面能 = 3ΔG*（即 ΔG=3ΔG*）。"},
+{c:"公式",q:"晶面指数求法步骤",a:"截距 → 取倒数 → 互质整数 → 加圆括号 (hkl)。\n例：截距 3a,2b,c → (236)；a,2b,2c → (211)。"},
+{c:"数字",q:"bcc / fcc / hcp 的每晶胞原子数与堆积系数",a:"bcc：2 个原子，68%\nfcc：4 个原子，74%\nhcp：6 个原子，74%"},
+{c:"数字",q:"滑移系数量",a:"fcc 12、bcc 12、hcp 3（hcp 滑移系少，塑性差、易孪生）。"},
+{c:"数字",q:"位错能量与伯氏矢量",a:"E ∝ b²。\n两根同向同大小位错合并后能量为原来的 4 倍。"},
+{c:"数字",q:"单位位错（伯氏矢量）",a:"fcc：a/2⟨110⟩，大小 √2/2·a\nbcc：a/2⟨111⟩，大小 √3/2·a"},
+{c:"数字",q:"Fe-Fe3C 三个关键温度",a:"727℃ 共析、1148℃ 共晶、1495℃ 包晶。\n口诀：727 共析、1148 共晶、1495 包晶。"},
+{c:"数字",q:"Fe-Fe3C 关键成分点",a:"0.0218%（α 最大溶碳）、0.77%（共析）、2.11%（γ 最大溶碳）、4.3%（共晶）、6.69%（Fe3C）。"},
+{c:"数字",q:"钢与铸铁的室温组织",a:"工业纯铁 F+Fe3CIII；亚共析钢 P+F；共析钢 P；过共析钢 P+Fe3CII；亚共晶白口铸铁 P+Fe3CII+Le′；共晶白口铸铁 Le′；过共晶白口铸铁 Fe3CI+Le′。"},
+{c:"数字",q:"扩散三条路径的快慢",a:"表面扩散 > 晶界扩散 > 晶内扩散，即 DS > DB > DL。"},
+{c:"数字",q:"小角度 / 大角度晶界界限",a:"相邻晶粒位相差 <10° 为小角度晶界，>10° 为大角度晶界。"},
+{c:"数字",q:"再结晶温度与临界变形度",a:"纯金属 T再 ≈ 0.4·T熔(K)。\n临界变形度约 2%~10%，此变形量退火晶粒反而粗大。"},
+{c:"数字",q:"滑移 vs 孪生一句话",a:"滑移：位移为原子间距整数倍、晶体位向不变、变形量大、fcc 易滑移。\n孪生：位移为分数倍、位向改变成镜面对称、变形快（近声速）、hcp 易孪生。"}
+];
+
+const DECKS = [
+  { id:"mcq", name:"选择题", type:"quiz", items:MCQS },
+  { id:"term", name:"名词解释", type:"flip", items:TERMS },
+  { id:"formula", name:"公式与数字", type:"flip", items:FORMULAS }
+];
+
+/* ============ 状态 ============ */
+const LS_KEY = "msf_flashcards_v1";
+let progress = loadProgress();
+let curDeck = 0;
+let order = [];          // 当前顺序（卡片下标）
+let idx = 0;             // order 内位置
+let flipped = false;
+let answered = false;
+let sessionScore = 0, sessionTotal = 0;
+let mode = "browse";     // browse | quiz
+let filter = "all";      // all | review | done
+
+function loadProgress(){
+  try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch(e){ return {}; }
+}
+function saveProgress(){
+  try { localStorage.setItem(LS_KEY, JSON.stringify(progress)); } catch(e){}
+}
+function deckState(d){
+  if(!progress[d.id]) progress[d.id] = {};
+  return progress[d.id];
+}
+function cardState(d, i){
+  const st = deckState(d);
+  if(!(i in st)) st[i] = "new";
+  return st[i];
+}
+
+/* ============ 渲染 ============ */
+const $ = s => document.querySelector(s);
+
+function renderTabs(){
+  $("#deckTabs").innerHTML = DECKS.map((d,i) =>
+    `<button class="tab${i===curDeck?' active':''}" data-i="${i}">${d.name}<span class="cnt">${d.items.length}</span></button>`
+  ).join("");
+}
+
+function renderFilters(){
+  const st = deckState(DECKS[curDeck]);
+  let nDone=0, nReview=0;
+  Object.values(st).forEach(v => { if(v==="done") nDone++; if(v==="review") nReview++; });
+  $("#filters").innerHTML = `
+    <button class="chip${filter==='all'?' active':''}" data-f="all">全部 ${DECKS[curDeck].items.length}</button>
+    <button class="chip${filter==='review'?' active':''}" data-f="review">需复习 ${nReview}</button>
+    <button class="chip${filter==='done'?' active':''}" data-f="done">已掌握 ${nDone}</button>`;
+}
+
+function renderStats(){
+  const st = deckState(DECKS[curDeck]);
+  let nDone=0, nReview=0, nNew=0;
+  Object.values(st).forEach(v => { if(v==="done") nDone++; else if(v==="review") nReview++; else nNew++; });
+  $("#stats").innerHTML = `
+    <span>本组：<b>${DECKS[curDeck].items.length}</b> 张</span>
+    <span>已掌握 <b style="color:var(--good)">${nDone}</b></span>
+    <span>需复习 <b style="color:var(--warn)">${nReview}</b></span>
+    <span>未开始 <b>${nNew}</b></span>
+    <span>本次自测 <b>${sessionScore}/${sessionTotal}</b></span>`;
+  const total = DECKS[curDeck].items.length;
+  $("#pbar").style.width = (total ? Math.round((nDone+nReview)/total*100) : 0) + "%";
+}
+
+function currentIndex(){
+  if(order.length===0) return -1;
+  return order[idx];
+}
+
+function filterMatches(d, i){
+  const s = cardState(d, i);
+  if(filter==="review") return s==="review";
+  if(filter==="done") return s==="done";
+  return true;
+}
+
+function rebuildOrder(){
+  const d = DECKS[curDeck];
+  order = d.items.map((_,i)=>i).filter(i => filterMatches(d,i));
+  idx = 0;
+  flipped = false; answered = false;
+}
+
+function renderCard(){
+  const d = DECKS[curDeck];
+  const ci = currentIndex();
+  $("#card").classList.remove("flipped");
+  flipped = false; answered = false;
+  if(ci === -1){
+    $("#frontFace").innerHTML = `<div style="margin:auto;text-align:center;color:var(--sub)"><div style="font-size:44px;margin-bottom:10px">🎉</div>当前筛选下没有卡片了</div>`;
+    $("#backFace").innerHTML = "";
+    $("#actions").innerHTML = `<button class="btn primary" id="resetFilter">查看全部</button>`;
+    $("#actions").querySelector("#resetFilter").onclick = () => { filter="all"; rebuildOrder(); renderAll(); };
+    return;
+  }
+  const item = d.items[ci];
+  const isFlip = d.type === "flip";
+  const browseMcq = d.type === "quiz" && mode === "browse";
+  $("#frontFace").innerHTML = `<div class="cat">${item.c} · ${ci+1}/${d.items.length}</div><div class="q">${item.q}</div>` +
+    (isFlip || browseMcq ? `<div class="hint">点击卡片查看答案</div>` : `<div class="hint">选择题模式：点击选项作答，答完看解析</div>`);
+
+  if(isFlip){
+    $("#backFace").innerHTML = `<div class="cat">答案</div><div class="a">${item.a}</div>`;
+    $("#actions").innerHTML = `
+      <button class="mark bad" id="mReview">还需复习</button>
+      <button class="mark good" id="mDone">记住了</button>`;
+    $("#mReview").onclick = () => markCard("review");
+    $("#mDone").onclick = () => markCard("done");
+  } else {
+    if(browseMcq){
+      const L = "ABCD";
+      $("#backFace").innerHTML = `<div class="cat">答案与解析</div><div class="a">正确答案：${L[item.a]}. ${item.o[item.a]}\n\n解析：${item.n}</div>`;
+    } else {
+      $("#backFace").innerHTML = "";
+    }
+    $("#actions").innerHTML = `<div class="options" id="opts"></div><div class="feedback" id="fb"></div>`;
+    const opts = $("#opts");
+    item.o.forEach((opt, oi) => {
+      const b = document.createElement("button");
+      b.className = "opt";
+      b.innerHTML = `<b>${"ABCD"[oi]}.</b> ${opt}`;
+      b.onclick = () => answer(oi);
+      opts.appendChild(b);
+    });
+  }
+}
+
+function answer(oi){
+  if(answered) return;
+  const d = DECKS[curDeck];
+  const ci = currentIndex();
+  const item = d.items[ci];
+  answered = true;
+  sessionTotal++;
+  const correct = oi === item.a;
+  if(correct) sessionScore++;
+  const opts = [...$("#opts").children];
+  opts.forEach((b, bi) => { b.disabled = true; if(bi===item.a) b.classList.add("correct"); if(bi===oi && !correct) b.classList.add("wrong"); });
+  const fb = $("#fb");
+  fb.className = "feedback show " + (correct ? "ok" : "no");
+  fb.innerHTML = correct
+    ? `✔ 答对了！正确答案：${"ABCD"[item.a]}. ${item.o[item.a]}<br><b>解析：</b>${item.n}`
+    : `✘ 答错了。正确答案：${"ABCD"[item.a]}. ${item.o[item.a]}<br><b>解析：</b>${item.n}`;
+  const old = cardState(d, ci);
+  if(correct && old !== "done") { deckState(d)[ci] = "done"; saveProgress(); }
+  else if(!correct) { deckState(d)[ci] = "review"; saveProgress(); }
+  $("#actions").insertAdjacentHTML("beforeend", `<button class="btn primary" id="nextQ" style="margin-top:12px">下一题 →</button>`);
+  $("#nextQ").onclick = () => { next(); };
+  renderStats(); renderFilters();
+}
+
+function markCard(v){
+  const d = DECKS[curDeck];
+  const ci = currentIndex();
+  if(ci === -1) return;
+  deckState(d)[ci] = v;
+  saveProgress();
+  next();
+}
+
+function next(){
+  if(idx < order.length - 1){ idx++; } else { idx = 0; }
+  renderCard(); renderStats(); renderFilters();
+}
+
+function renderAll(){
+  renderTabs(); renderFilters(); renderStats(); renderCard();
+  $("#modeBtn").textContent = mode === "quiz" ? "模式：自测" : "模式：浏览";
+  $("#modeBtn").style.display = DECKS[curDeck].type === "quiz" ? "" : "none";
+}
+
+/* ============ 事件 ============ */
+$("#deckTabs").addEventListener("click", e => {
+  const t = e.target.closest(".tab"); if(!t) return;
+  curDeck = +t.dataset.i;
+  filter = "all"; mode = "browse"; sessionScore = 0; sessionTotal = 0;
+  rebuildOrder(); renderAll();
+});
+$("#filters").addEventListener("click", e => {
+  const c = e.target.closest(".chip"); if(!c) return;
+  filter = c.dataset.f;
+  rebuildOrder(); renderAll();
+});
+$("#card").addEventListener("click", () => {
+  const d = DECKS[curDeck];
+  const canFlip = d.type === "flip" || (d.type === "quiz" && mode === "browse");
+  if(!canFlip || currentIndex() === -1) return;
+  flipped = !flipped;
+  $("#card").classList.toggle("flipped", flipped);
+});
+$("#modeBtn").addEventListener("click", () => {
+  mode = mode === "browse" ? "quiz" : "browse";
+  rebuildOrder(); renderAll();
+});
+$("#shuffleBtn").addEventListener("click", () => {
+  for(let i = order.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  idx = 0;
+  renderCard();
+});
+$("#resetBtn").addEventListener("click", () => {
+  if(!confirm("确定重置当前组的全部进度吗？")) return;
+  progress[DECKS[curDeck].id] = {};
+  saveProgress();
+  sessionScore = 0; sessionTotal = 0;
+  rebuildOrder(); renderAll();
+});
+
+/* 键盘：空格翻卡/下一题 */
+document.addEventListener("keydown", e => {
+  if(e.target.tagName === "INPUT") return;
+  if(e.code === "Space"){
+    e.preventDefault();
+    const d = DECKS[curDeck];
+    const canFlip = d.type === "flip" || (d.type === "quiz" && mode === "browse");
+    if(canFlip){ flipped = !flipped; $("#card").classList.toggle("flipped", flipped); }
+  }
+});
+
+/* ============ 启动 ============ */
+rebuildOrder();
+renderAll();
+</script>
+</body>
+</html>
