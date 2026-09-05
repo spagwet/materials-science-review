@@ -90,6 +90,8 @@
   .hint { color: var(--sub); font-size: 12px; margin-top: 14px; text-align: center; }
 
   .actions { display: flex; gap: 10px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+  .navrow { display: flex; gap: 12px; justify-content: center; margin-top: 14px; flex-wrap: wrap; }
+  .navrow .btn { min-width: 110px; padding: 10px 16px; font-size: 14px; }
   .mark { padding: 11px 22px; border: none; border-radius: 12px; font-size: 15px; cursor: pointer; color: #fff; }
   .mark.good { background: var(--good); }
   .mark.bad { background: var(--warn); }
@@ -148,8 +150,9 @@
     <div class="face back" id="backFace"></div>
   </div>
   <div class="actions" id="actions"></div>
-</div>
-<div class="progress-bar"><div id="pbar"></div></div>
+  <div class="navrow" id="navRow"></div>
+  </div>
+  <div class="progress-bar"><div id="pbar"></div></div>
 
 <footer>使用建议：先「浏览」过一遍 → 用「选择题自测」检验 → 每天把「需复习」的卡片过一遍。<br>进度按卡片保存，换电脑或清浏览器缓存会丢失。</footer>
 
@@ -358,6 +361,7 @@ function rebuildOrder(){
 }
 
 function renderCard(){
+  renderNav();
   const d = DECKS[curDeck];
   const ci = currentIndex();
   $("#card").classList.remove("flipped");
@@ -420,8 +424,6 @@ function answer(oi){
   const old = cardState(d, ci);
   if(correct && old !== "done") { deckState(d)[ci] = "done"; saveProgress(); }
   else if(!correct) { deckState(d)[ci] = "review"; saveProgress(); }
-  $("#actions").insertAdjacentHTML("beforeend", `<button class="btn primary" id="nextQ" style="margin-top:12px">下一题 →</button>`);
-  $("#nextQ").onclick = () => { next(); };
   renderStats(); renderFilters();
 }
 
@@ -437,6 +439,21 @@ function markCard(v){
 function next(){
   if(idx < order.length - 1){ idx++; } else { idx = 0; }
   renderCard(); renderStats(); renderFilters();
+}
+
+function go(d){
+  if(order.length === 0) return;
+  idx = (idx + d + order.length) % order.length;
+  renderCard(); renderStats(); renderFilters();
+}
+
+function renderNav(){
+  const empty = currentIndex() === -1;
+  $("#navRow").innerHTML = `
+    <button class="btn" id="prevBtn"${empty ? " disabled" : ""}>‹ 上一题</button>
+    <button class="btn" id="nextBtn"${empty ? " disabled" : ""}>下一题 ›</button>`;
+  $("#prevBtn").onclick = () => go(-1);
+  $("#nextBtn").onclick = () => go(1);
 }
 
 function renderAll(){
@@ -493,6 +510,8 @@ document.addEventListener("keydown", e => {
     const canFlip = d.type === "flip" || (d.type === "quiz" && mode === "browse");
     if(canFlip){ flipped = !flipped; $("#card").classList.toggle("flipped", flipped); }
   }
+  if(e.code === "ArrowLeft"){ go(-1); }
+  if(e.code === "ArrowRight"){ go(1); }
 });
 
 /* ============ 启动 ============ */
